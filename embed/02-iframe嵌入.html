@@ -1,0 +1,38 @@
+<!--
+  方案 B：整站内嵌 —— 把课题组网站装进主页的某个栏目页面里
+  用法：编辑器切到「源码 / HTML」模式，整段粘贴。把 src 换成真实地址。
+
+  两个关键点：
+  1. 地址必须带 ?embed=1，站点会隐藏自己的 logo、署名和页脚（否则和学校主页重复），
+     只保留栏目导航；hash 路由要写在 ?embed=1 之后，例如 /?embed=1#/publications
+  2. 必须用 https，主页是 https，嵌 http 资源会被浏览器当混合内容拦掉，白屏。
+
+  若编辑器会过滤 <script>，整站仍能显示，只是高度固定为下面 height 的值，
+  需要手动调（建议 1400–1800），内容超出时 iframe 内部出现滚动条。
+-->
+<div style="width:100%;border:1px solid #e3ded2;background:#faf9f6;">
+  <iframe id="pei-lab-frame"
+          src="https://lab.example.com/?embed=1"
+          title="裴玮课题组"
+          loading="lazy"
+          style="display:block;width:100%;height:1500px;border:0;"
+          allowfullscreen></iframe>
+</div>
+<script>
+(function () {
+  var frame = document.getElementById('pei-lab-frame');
+  if (!frame) return;
+  // 子页面会把自己的内容高度 postMessage 过来，这里同步给 iframe，避免出现双层滚动条
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || d.type !== 'pei-lab:height' || typeof d.height !== 'number') return;
+    frame.style.height = Math.max(600, Math.min(d.height, 12000)) + 'px';
+  });
+  // 窄屏时给一个更矮的初始高度，避免手机上大片空白
+  function fit() {
+    if (window.innerWidth < 640) frame.style.height = '1800px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>

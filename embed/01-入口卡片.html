@@ -1,0 +1,32 @@
+<!--
+  方案 A：入口卡片 —— 粘贴到「内容管理 → 新建」的富文本编辑器里
+  用法：编辑器切到「源码 / HTML」模式，整段粘贴，再切回可视化模式检查。
+  说明：全部用行内样式 + table 布局，不依赖任何外部 CSS，绝大多数校园 CMS 都能保留。
+        把下面两处 https://lab.example.com 换成课题组网站的真实地址。
+-->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"
+       style="width:100%;max-width:720px;border:1px solid #e3ded2;border-left:3px solid #17334f;background:#faf9f6;">
+  <tr>
+    <td style="padding:26px 28px;">
+      <p style="margin:0 0 6px;font:600 12px/1.6 -apple-system,'Segoe UI',sans-serif;color:#8f6330;letter-spacing:.14em;">
+        RESEARCH GROUP
+      </p>
+      <p style="margin:0 0 10px;font:600 22px/1.4 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif;color:#17334f;">
+        裴玮课题组 · 团簇物理与计算材料
+      </p>
+      <p style="margin:0 0 18px;font:400 14px/1.85 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif;color:#5a646e;">
+        课题组独立站点：成员介绍、四个研究方向、60 余篇论文与科研项目、招生信息，
+        以及自动聚合的课题组动态与媒体报道。支持中英文切换，手机端自适应。
+      </p>
+      <p style="margin:0;">
+        <a href="https://lab.example.com"
+           style="display:inline-block;padding:11px 22px;background:#17334f;color:#ffffff;
+                  font:500 14px/1 -apple-system,'Segoe UI','Microsoft YaHei',sans-serif;
+                  text-decoration:none;letter-spacing:.02em;">进入课题组网站 →</a>
+        <span style="font:400 12px/1.6 -apple-system,sans-serif;color:#78828d;margin-left:14px;">
+          lab.example.com
+        </span>
+      </p>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>裴玮课题组 · 团簇物理与计算材料 | 扬州大学</title>
+<meta name="description" content="扬州大学裴玮课题组，聚焦团簇物理与计算材料学：配体团簇激发态动力学、量子点发光微观机理、功能团簇逆向设计、单团簇器件理论设计。">
+<meta name="theme-color" content="#faf9f6">
+<meta property="og:title" content="裴玮课题组 · 团簇物理与计算材料">
+<meta property="og:description" content="扬州大学物理科学与技术学院 · 团簇物理与计算材料学研究组">
+<meta property="og:type" content="website">
+<style>
+/* ==========================================================================
+   裴玮课题组 · 站点样式
+   设计取向：学术、克制、留白；深墨蓝 + 金铜色；细线分隔而非阴影
+   ========================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  --paper: #faf9f6;
+  --paper-2: #f4f1ea;
+  --surface: #ffffff;
+  --ink: #14181d;
+  --ink-2: #414b57;
+  --ink-3: #6a7480;
+  --ink-4: #8a939c;
+  --line: #e4e0d7;
+  --line-2: #d2ccbe;
+  --navy: #17334f;
+  --navy-2: #0e2338;
+  --navy-soft: #eaeff4;
+  --gold: #8f6330;
+  --gold-2: #c8a16a;
+  --gold-soft: #f5eee1;
+  --max: 1220px;
+  --gutter: 48px;
+  --r: 3px;
+  --sans: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", system-ui, sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
+    "Songti SC", "Source Han Serif SC", serif;
+  --mono: "SFMono-Regular", "JetBrains Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ---------- 2. Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+h1, h2, h3, h4 { margin: 0; font-weight: 600; line-height: 1.22; letter-spacing: -0.012em; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+::selection { background: #d8e2ec; color: var(--navy-2); }
+:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 2px; }
+
+.skip {
+  position: fixed; top: 8px; left: 8px; z-index: 999;
+  padding: 8px 14px; background: var(--navy); color: #fff;
+  font-size: 13px; transform: translateY(-160%); transition: transform .2s;
+}
+.skip:focus { transform: none; }
+
+/* ---------- 3. Layout ---------- */
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+main { min-height: 60vh; }
+
+.view { display: none; }
+.view.is-active { display: block; animation: viewIn .5s var(--ease) both; }
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 4. Topbar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(250, 249, 246, .97);
+  border-bottom: 1px solid var(--line);
+}
+@supports (backdrop-filter: blur(1px)) {
+  .topbar { background: rgba(250, 249, 246, .86); backdrop-filter: saturate(160%) blur(14px); }
+}
+.topbar__inner {
+  display: flex; align-items: center; gap: 32px;
+  height: 68px;
+}
+.brand { display: flex; align-items: center; gap: 11px; flex: none; }
+.brand__mark { width: 34px; height: 34px; color: var(--navy); flex: none; }
+.brand__mark svg { width: 100%; height: 100%; }
+.brand__text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand__text strong { font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+.brand__text small {
+  font-size: 10.5px; color: var(--ink-3); letter-spacing: .06em;
+  text-transform: uppercase; margin-top: 2px;
+}
+
+.nav { display: flex; align-items: center; gap: 4px; margin-inline: auto; }
+.nav a {
+  position: relative; padding: 8px 12px; font-size: 13.5px; color: var(--ink-2);
+  letter-spacing: .01em; white-space: nowrap; transition: color .2s;
+}
+.nav a::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 1.5px;
+  background: var(--navy); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.nav a:hover { color: var(--ink); }
+.nav a.is-on { color: var(--navy); font-weight: 600; }
+.nav a.is-on::after { transform: none; }
+
+.topbar__tools { display: flex; align-items: center; gap: 14px; flex: none; }
+.lang {
+  display: flex; align-items: center; border: 1px solid var(--line-2);
+  border-radius: 2px; overflow: hidden;
+}
+.lang button {
+  padding: 4px 9px; font-size: 11.5px; letter-spacing: .06em; color: var(--ink-3);
+  font-weight: 500; transition: background .2s, color .2s;
+}
+.lang button + button { border-left: 1px solid var(--line-2); }
+.lang button.is-on { background: var(--navy); color: #fff; }
+
+.burger { display: none; width: 38px; height: 38px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+.burger span { display: block; width: 19px; height: 1.5px; background: var(--ink); transition: transform .3s var(--ease), opacity .2s; }
+.burger[aria-expanded="true"] span:first-child { transform: translateY(3.2px) rotate(45deg); }
+.burger[aria-expanded="true"] span:last-child { transform: translateY(-3.2px) rotate(-45deg); }
+
+/* ---------- 5. Shared type ---------- */
+.kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); font-family: var(--mono);
+}
+.kicker::after { content: ""; width: 26px; height: 1px; background: var(--line-2); }
+
+.sec { padding-block: 88px; }
+.sec--tight { padding-block: 64px; }
+.sec + .sec { border-top: 1px solid var(--line); }
+
+.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 44px; }
+.sec-head__main { max-width: 640px; }
+.sec-head h2 { font-size: clamp(24px, 2.6vw, 33px); margin-top: 14px; }
+.sec-head .lead { margin-top: 14px; color: var(--ink-2); font-size: 15px; line-height: 1.8; max-width: 58ch; }
+.sec-num {
+  font-family: var(--mono); font-size: 11px; color: var(--ink-4); letter-spacing: .1em;
+  padding-bottom: 6px; flex: none;
+}
+
+.lead-lg { font-size: 17px; line-height: 1.85; color: var(--ink-2); }
+.muted { color: var(--ink-3); }
+.small { font-size: 13px; line-height: 1.7; }
+.mono { font-family: var(--mono); }
+
+/* ---------- 6. Buttons & links ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 22px; font-size: 13.5px; font-weight: 500; letter-spacing: .02em;
+  border: 1px solid var(--navy); background: var(--navy); color: #fff;
+  border-radius: var(--r); transition: background .22s, color .22s, border-color .22s, transform .22s;
+}
+.btn:hover { background: var(--navy-2); border-color: var(--navy-2); transform: translateY(-1px); }
+.btn--ghost { background: transparent; color: var(--navy); border-color: var(--line-2); }
+.btn--ghost:hover { background: #fff; border-color: var(--navy); color: var(--navy); }
+.btn__arrow { transition: transform .25s var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13.5px; color: var(--navy); border-bottom: 1px solid var(--line-2);
+  padding-bottom: 2px; transition: border-color .2s, gap .2s;
+}
+.link-arrow:hover { border-color: var(--navy); gap: 11px; }
+
+.ext::after {
+  content: "↗"; font-size: .85em; margin-left: 4px; color: var(--ink-4);
+  display: inline-block; transform: translateY(-1px);
+}
+
+/* ---------- 7. Hero ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  padding-block: 76px 0;
+  background:
+    radial-gradient(1100px 520px at 78% -10%, #eef2f6 0%, rgba(238, 242, 246, 0) 62%),
+    var(--paper);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(to right, rgba(23, 51, 79, .045) 1px, transparent 1px);
+  background-size: 25% 100%; opacity: .8;
+}
+.hero__grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  gap: 56px; align-items: center;
+  padding-bottom: 64px;
+}
+.hero__name {
+  font-size: clamp(40px, 5.6vw, 68px); letter-spacing: -.03em; line-height: 1.04;
+  margin-top: 18px;
+}
+.hero__name span {
+  display: block; font-family: var(--serif); font-size: .38em; letter-spacing: .06em;
+  font-weight: 400; color: var(--ink-3); margin-top: 12px; text-transform: none;
+}
+.hero__role {
+  margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line-2);
+  display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline;
+}
+.hero__role b { font-size: 15px; font-weight: 600; color: var(--navy); letter-spacing: .01em; }
+.hero__role span { font-size: 13.5px; color: var(--ink-3); }
+.hero__affil { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.hero__lead { margin-top: 24px; max-width: 54ch; font-size: 15.5px; line-height: 1.86; color: var(--ink-2); }
+.hero__actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+.hero__facts { margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.hero__facts div { padding: 14px 16px 0 0; }
+.hero__facts dt { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); }
+.hero__facts dd { margin: 5px 0 0; font-size: 13px; color: var(--ink-2); }
+
+/* cluster visual */
+.cluster-box { position: relative; aspect-ratio: 1 / 1; max-width: 460px; margin-inline: auto; width: 100%; }
+.cluster-box::before {
+  content: ""; position: absolute; inset: 8%; border: 1px solid var(--line);
+  border-radius: 50%; opacity: .7;
+}
+.cluster-box::after {
+  content: ""; position: absolute; inset: 20%; border: 1px dashed var(--line-2);
+  border-radius: 50%; opacity: .5;
+}
+#cluster { position: relative; z-index: 1; width: 100%; height: 100%; }
+.cluster-cap {
+  position: absolute; left: 0; bottom: -2px; z-index: 2;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--ink-3);
+  background: var(--paper); padding-right: 10px;
+}
+.cluster-cap i { color: var(--gold); font-style: normal; }
+
+/* statbar */
+.statbar { position: relative; z-index: 1; border-top: 1px solid var(--line-2); background: rgba(255, 255, 255, .55); }
+.statbar__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 26px 0 24px; display: flex; align-items: baseline; gap: 10px; }
+.stat + .stat { border-left: 1px solid var(--line); padding-left: 28px; }
+.stat b { font-family: var(--serif); font-size: clamp(26px, 3vw, 40px); font-weight: 600; letter-spacing: -.02em; color: var(--navy); line-height: 1; }
+.stat span { font-size: 11.5px; color: var(--ink-3); letter-spacing: .04em; }
+.stat em { display: block; font-style: normal; font-size: 10.5px; font-family: var(--mono); color: var(--ink-4); letter-spacing: .1em; margin-top: 4px; }
+
+/* ---------- 8. Grids & cards ---------- */
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+
+.card {
+  background: var(--paper); padding: 30px 26px 28px; position: relative;
+  transition: background .28s var(--ease); display: flex; flex-direction: column;
+}
+.card:hover { background: #fff; }
+.card__no {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; color: var(--gold);
+  margin-bottom: 18px; display: block;
+}
+.card h3 { font-size: 16.5px; margin-bottom: 12px; letter-spacing: -.005em; }
+.card p { font-size: 13.5px; line-height: 1.78; color: var(--ink-2); }
+.card__more { margin-top: auto; padding-top: 20px; }
+.card__more a { font-size: 12.5px; color: var(--navy); display: inline-flex; gap: 6px; align-items: center; }
+.card__more a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* research accents */
+.card--research::before {
+  content: ""; position: absolute; left: 0; top: 0; height: 2px; width: 0;
+  background: var(--gold-2); transition: width .45s var(--ease);
+}
+.card--research:hover::before { width: 100%; }
+
+/* ---------- 9. Home: selected papers ---------- */
+.mini-pubs { border-top: 1px solid var(--line); }
+.mini-pub {
+  display: grid; grid-template-columns: 118px minmax(0, 1fr) auto; gap: 24px;
+  padding: 22px 0; border-bottom: 1px solid var(--line); align-items: start;
+  transition: padding-left .25s var(--ease);
+}
+.mini-pub:hover { padding-left: 8px; }
+.mini-pub__j {
+  font-family: var(--serif); font-size: 12.5px; font-style: italic; color: var(--navy);
+  line-height: 1.45;
+}
+.mini-pub__t { font-size: 14.5px; line-height: 1.55; color: var(--ink); max-width: 62ch; }
+.mini-pub__a { margin-top: 6px; font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+.mini-pub__y { font-family: var(--mono); font-size: 12px; color: var(--ink-4); padding-top: 2px; }
+
+/* ---------- 10. Team ---------- */
+.pi-card {
+  display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 40px;
+  padding: 36px; background: #fff; border: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+.pi-card__side { border-right: 1px solid var(--line); padding-right: 32px; }
+.pi-avatar {
+  width: 100%; aspect-ratio: 1; background: var(--navy); color: #fff;
+  display: grid; place-items: center; position: relative; overflow: hidden;
+}
+.pi-avatar b { font-family: var(--serif); font-size: 46px; letter-spacing: .02em; font-weight: 500; z-index: 1; }
+.pi-avatar::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 12px);
+}
+.pi-card__side h3 { margin-top: 20px; font-size: 22px; }
+.pi-card__side p { font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+.pi-card__side .links { margin-top: 18px; display: flex; flex-direction: column; gap: 6px; }
+.pi-card__side .links a { font-size: 12px; color: var(--navy); font-family: var(--mono); }
+
+.member-group { margin-bottom: 52px; }
+.member-group__head {
+  display: flex; align-items: baseline; gap: 14px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-2); margin-bottom: 1px;
+}
+.member-group__head h3 { font-size: 15px; letter-spacing: .04em; }
+.member-group__head span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); letter-spacing: .1em; }
+.member-group__head b { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-3); font-weight: 400; }
+
+.member { display: flex; gap: 16px; padding: 22px 22px 20px; background: var(--paper); }
+.member:hover { background: #fff; }
+.member__av {
+  width: 44px; height: 44px; flex: none; border-radius: 50%;
+  background: var(--navy-soft); color: var(--navy); display: grid; place-items: center;
+  font-family: var(--serif); font-size: 16px; letter-spacing: .01em;
+}
+.member__body h4 { font-size: 15px; font-weight: 600; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.member__body h4 em { font-style: normal; font-size: 10.5px; font-family: var(--mono); color: var(--gold); letter-spacing: .06em; }
+.member__role { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; letter-spacing: .02em; }
+.member__to { font-size: 11.5px; color: var(--gold); margin-top: 7px; letter-spacing: .01em; }
+.member--ghost { background: var(--paper); }
+.member__notes { margin-top: 9px; font-size: 12px; line-height: 1.7; color: var(--ink-2); }
+.member__notes li { position: relative; padding-left: 11px; }
+.member__notes li::before { content: ""; position: absolute; left: 0; top: .68em; width: 3px; height: 3px; background: var(--ink-4); border-radius: 50%; }
+
+.notice {
+  display: flex; gap: 12px; padding: 14px 18px; background: var(--paper-2);
+  border-left: 2px solid var(--gold-2); font-size: 12.5px; line-height: 1.75; color: var(--ink-2);
+}
+.notice b { color: var(--ink); font-weight: 600; }
+
+/* ---------- 11. Research view ---------- */
+.research-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 64px; align-items: start; margin-bottom: 64px; }
+
+.pipeline { border: 1px solid var(--line); background: #fff; padding: 26px; }
+.pipeline__title { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--ink-4); text-transform: uppercase; margin-bottom: 20px; }
+.pipeline ol { display: flex; flex-direction: column; gap: 0; }
+.pipeline li {
+  display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; padding: 12px 0;
+  border-top: 1px solid var(--line); align-items: baseline;
+}
+.pipeline li:first-child { border-top: 0; padding-top: 0; }
+.pipeline li i { font-family: var(--mono); font-size: 10px; color: var(--gold); font-style: normal; }
+.pipeline li b { font-size: 13.5px; font-weight: 600; display: block; }
+.pipeline li span { font-size: 11.5px; color: var(--ink-3); display: block; margin-top: 2px; line-height: 1.6; }
+
+.dir { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-block: 48px; border-top: 1px solid var(--line); }
+.dir:last-child { border-bottom: 1px solid var(--line); }
+.dir__aside h3 { font-size: 17.5px; line-height: 1.4; }
+.dir__aside .idx {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; color: var(--gold);
+  display: block; margin-bottom: 12px;
+}
+.dir__aside p { font-size: 12px; color: var(--ink-3); margin-top: 12px; line-height: 1.7; font-family: var(--serif); font-style: italic; }
+.dir__body > p { font-size: 14.5px; line-height: 1.85; color: var(--ink-2); max-width: 68ch; }
+.dir__points { margin-top: 22px; display: grid; gap: 10px; }
+.dir__points li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; font-size: 13.5px; line-height: 1.75; color: var(--ink-2); }
+.dir__points li::before { content: "—"; color: var(--gold-2); font-size: 12px; }
+.tags { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; color: var(--ink-2);
+  border: 1px solid var(--line-2); padding: 3px 9px; border-radius: 2px; background: #fff;
+}
+
+/* ---------- 12. Publications ---------- */
+.pub-toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line-2); margin-bottom: 8px;
+}
+.tabs { display: flex; gap: 2px; flex-wrap: wrap; }
+.tabs button {
+  padding: 7px 15px; font-size: 13px; color: var(--ink-2); border: 1px solid transparent;
+  border-radius: 2px; transition: background .2s, color .2s, border-color .2s;
+}
+.tabs button:hover { background: var(--paper-2); }
+.tabs button.is-on { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.search { position: relative; margin-left: auto; min-width: 210px; }
+.search input {
+  width: 100%; padding: 8px 12px 8px 32px; font-size: 13px; font-family: var(--sans);
+  border: 1px solid var(--line-2); background: #fff; color: var(--ink); border-radius: 2px;
+}
+.search input::placeholder { color: var(--ink-4); }
+.search input:focus { outline: none; border-color: var(--navy); }
+.search::before {
+  content: ""; position: absolute; left: 11px; top: 50%; width: 11px; height: 11px;
+  margin-top: -6px; border: 1.5px solid var(--ink-4); border-radius: 50%;
+}
+.search::after {
+  content: ""; position: absolute; left: 20px; top: 50%; width: 5px; height: 1.5px;
+  background: var(--ink-4); transform: rotate(45deg); margin-top: 4px;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 16px 0 4px; }
+.chip {
+  padding: 4px 11px; font-size: 11.5px; font-family: var(--mono); letter-spacing: .04em;
+  color: var(--ink-3); border: 1px solid var(--line); border-radius: 2px; background: transparent;
+  transition: all .18s;
+}
+.chip:hover { border-color: var(--line-2); color: var(--ink); }
+.chip.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.chip-label {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--ink-4);
+  padding: 4px 8px 4px 0; align-self: center; text-transform: uppercase;
+}
+
+.pub-count { font-family: var(--mono); font-size: 11px; color: var(--ink-4); letter-spacing: .08em; padding: 14px 0 4px; }
+
+.yearblock { padding-top: 26px; }
+.yearblock__h {
+  display: flex; align-items: center; gap: 16px; padding-bottom: 12px;
+}
+.yearblock__h b { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--navy); letter-spacing: .01em; }
+.yearblock__h i { flex: 1; height: 1px; background: var(--line); }
+.yearblock__h em { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); font-style: normal; }
+
+.pub { padding: 15px 0 15px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: minmax(0,1fr) 96px; gap: 20px; }
+.pub:hover { background: rgba(255,255,255,.7); }
+.pub__a { font-size: 13px; line-height: 1.66; color: var(--ink-2); }
+.pub__a b { color: var(--navy); font-weight: 600; }
+.pub__r { margin-top: 5px; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.pub__r em { font-family: var(--serif); font-style: italic; color: var(--ink); }
+.pub__r a { color: var(--navy); border-bottom: 1px solid var(--line-2); word-break: break-all; }
+.pub__r a:hover { border-color: var(--navy); }
+.pub__badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; align-content: flex-start; }
+.badge {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; padding: 2px 6px;
+  border: 1px solid var(--line-2); color: var(--ink-3); border-radius: 2px; white-space: nowrap;
+}
+.badge--corr { background: var(--navy-soft); border-color: #c9d5e1; color: var(--navy); }
+.badge--first { background: var(--gold-soft); border-color: #e2cba4; color: var(--gold); }
+.badge--ug { background: #eef4ee; border-color: #cadcc9; color: #47734a; }
+
+/* projects */
+.proj { padding: 26px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 120px minmax(0,1fr) 150px; gap: 32px; }
+.proj:first-child { border-top: 1px solid var(--line); }
+.proj__k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--gold); }
+.proj__k span { display: block; font-family: var(--sans); font-size: 10.5px; color: var(--ink-4); letter-spacing: .02em; margin-top: 5px; }
+.proj h3 { font-size: 15px; line-height: 1.55; font-weight: 600; }
+.proj__meta { margin-top: 9px; font-size: 12.5px; color: var(--ink-3); line-height: 1.7; }
+.proj__side { text-align: right; font-size: 12px; color: var(--ink-3); font-family: var(--mono); line-height: 1.9; }
+.proj__side b { display: block; font-family: var(--serif); font-size: 17px; color: var(--navy); font-weight: 600; }
+
+/* honors table */
+.honor-list { border-top: 1px solid var(--line); }
+.honor-list li { display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 24px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.honor-list li span { font-family: var(--mono); font-size: 11.5px; color: var(--gold); }
+
+/* ---------- 13. News ---------- */
+.news-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--line-2); }
+.news-updated { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); letter-spacing: .04em; display: flex; align-items: center; gap: 6px; }
+.dot-live { width: 5px; height: 5px; border-radius: 50%; background: #4f8a5b; box-shadow: 0 0 0 3px rgba(79,138,91,.15); }
+
+.news-list { margin-top: 8px; }
+.news-item {
+  display: grid; grid-template-columns: 96px minmax(0,1fr) 132px; gap: 28px;
+  padding: 24px 0; border-bottom: 1px solid var(--line); align-items: start;
+  transition: padding-left .25s var(--ease);
+}
+.news-item:hover { padding-left: 8px; }
+.news-item__date { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: .02em; padding-top: 3px; }
+.news-item__date b { display: block; font-family: var(--mono); font-size: 13.5px; color: var(--navy); font-weight: 600; letter-spacing: .02em; }
+.news-item__t { font-size: 15.5px; line-height: 1.55; font-weight: 600; color: var(--ink); }
+a.news-item__t:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.news-item__d { margin-top: 7px; font-size: 12.5px; line-height: 1.75; color: var(--ink-3); max-width: 70ch; }
+.news-item__src { margin-top: 11px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.src {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink-2);
+  background: var(--paper-2); border: 1px solid var(--line); padding: 2px 8px; border-radius: 2px;
+}
+.src svg { width: 11px; height: 11px; flex: none; }
+.news-item__kind { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.kind {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; padding: 3px 7px;
+  border-radius: 2px; border: 1px solid var(--line-2); color: var(--ink-3); white-space: nowrap;
+}
+.kind--media { border-color: #d9c3a0; color: var(--gold); background: var(--gold-soft); }
+.kind--group { border-color: #c6d2dd; color: var(--navy); background: var(--navy-soft); }
+.kind--talk { border-color: #cdd8cd; color: #4a6b4d; background: #eef3ee; }
+.kind--award { border-color: #e0d0c4; color: #8a5a3b; background: #f7efe9; }
+
+.aggregator-note {
+  margin-top: 44px; padding: 22px 24px; border: 1px solid var(--line); background: #fff;
+  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 28px; align-items: center;
+}
+.aggregator-note h4 { font-size: 13.5px; margin-bottom: 7px; }
+.aggregator-note p { font-size: 12.5px; line-height: 1.75; color: var(--ink-3); max-width: 74ch; }
+.aggregator-note code { font-family: var(--mono); font-size: 11.5px; background: var(--paper-2); padding: 1px 5px; }
+
+/* ---------- 14. Join ---------- */
+.join-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 56px; align-items: start; }
+.join-block + .join-block { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--line); }
+.join-grid .lead-lg + .join-block { margin-top: 34px; }
+.join-block h3 { font-size: 17px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.join-block h3 span { font-family: var(--mono); font-size: 10px; color: var(--gold); letter-spacing: .1em; }
+.join-block p { font-size: 14px; line-height: 1.85; color: var(--ink-2); }
+.check { margin-top: 16px; display: grid; gap: 9px; }
+.check li { display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 10px; font-size: 13.5px; line-height: 1.7; color: var(--ink-2); }
+.check li::before { content: "✓"; color: var(--gold); font-size: 12px; line-height: 1.9; }
+
+.join-aside { background: #fff; border: 1px solid var(--line); padding: 32px 30px; position: sticky; top: 92px; }
+.join-aside h3 { font-size: 15px; margin-bottom: 18px; }
+.join-aside dl { display: grid; gap: 14px; }
+.join-aside dt { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4); }
+.join-aside dd { margin: 3px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.65; }
+.join-aside .btn { margin-top: 24px; width: 100%; justify-content: center; }
+
+/* ---------- 15. Contact ---------- */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.contact-cell { background: var(--paper); padding: 30px 26px; }
+.contact-cell:hover { background: #fff; }
+.contact-cell dt { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); }
+.contact-cell dd { margin: 12px 0 0; font-size: 14.5px; line-height: 1.7; color: var(--ink); }
+.contact-cell dd a { border-bottom: 1px solid var(--line-2); }
+.contact-cell dd a:hover { border-color: var(--navy); color: var(--navy); }
+.contact-cell p { margin-top: 10px; font-size: 12px; color: var(--ink-3); }
+
+.map-card { margin-top: 40px; border: 1px solid var(--line); background: #fff; display: grid; grid-template-columns: minmax(0,1fr) 380px; }
+.map-canvas { position: relative; min-height: 260px; background: var(--paper-2); overflow: hidden; }
+.map-canvas svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+.map-info { padding: 30px; border-left: 1px solid var(--line); }
+.map-info h3 { font-size: 15px; margin-bottom: 12px; }
+.map-info p { font-size: 13px; line-height: 1.8; color: var(--ink-2); }
+.map-info .kv { margin-top: 18px; display: grid; gap: 10px; }
+.map-info .kv div { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: 10px; font-size: 12.5px; }
+.map-info .kv dt { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); letter-spacing: .06em; padding-top: 2px; }
+.map-info .kv dd { margin: 0; color: var(--ink-2); }
+
+/* ---------- 16. Footer ---------- */
+.footer { margin-top: 0; border-top: 1px solid var(--line-2); background: var(--paper-2); }
+.footer__grid { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,.8fr) minmax(0,.8fr); gap: 56px; padding-block: 52px 40px; }
+.footer h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 16px; font-weight: 500; }
+.footer p { font-size: 12.5px; line-height: 1.85; color: var(--ink-3); max-width: 40ch; }
+.footer ul { display: grid; gap: 8px; }
+.footer li a, .footer li { font-size: 12.5px; color: var(--ink-2); }
+.footer li a:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.footer__brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer__brand .brand__mark { width: 28px; height: 28px; }
+.footer__brand strong { font-size: 14px; letter-spacing: .02em; }
+.footer__bottom {
+  border-top: 1px solid var(--line); padding-block: 18px 22px;
+  display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between;
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); letter-spacing: .03em;
+}
+
+/* ---------- 16b. 组件补充 ---------- */
+.stat b i {
+  font-style: normal; font-size: .5em; color: var(--gold); font-family: var(--mono);
+  letter-spacing: 0; vertical-align: super; margin-left: 1px;
+}
+.stat em { order: 2; }
+.mini-pub__t { display: block; }
+.mini-pub__a { display: block; }
+.member-group .grid { border-top: 0; }
+.pi-card__body > p { font-size: 14.5px; line-height: 1.88; color: var(--ink-2); }
+.pi-card__body > p + p { margin-top: 15px; }
+.pi-card__body .lead-lg { font-size: 15px; color: var(--ink-2); }
+.honor-list--time li { grid-template-columns: 132px minmax(0, 1fr); align-items: baseline; }
+.honor-list--time li b { font-size: 14px; font-weight: 600; }
+
+.cta-band {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center;
+  padding: 44px 46px; background: var(--navy); color: #fff;
+}
+.cta-band h3 { font-size: 23px; margin-top: 12px; color: #fff; }
+.cta-band p { color: rgba(255, 255, 255, .68); font-size: 13.5px; margin-top: 10px; max-width: 62ch; line-height: 1.8; }
+.cta-band .kicker { color: var(--gold-2); }
+.cta-band .kicker::after { background: rgba(255, 255, 255, .28); }
+.cta-band .btn { background: #fff; color: var(--navy); border-color: #fff; flex: none; }
+.cta-band .btn:hover { background: var(--gold-2); border-color: var(--gold-2); color: var(--navy-2); }
+
+.pipeline li div { min-width: 0; }
+
+/* ---------- 17. Responsive ---------- */
+@media (max-width: 1080px) {
+  :root { --gutter: 36px; }
+  .nav a { padding: 8px 9px; font-size: 13px; }
+  .hero__grid { gap: 40px; }
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  .map-card { grid-template-columns: 1fr; }
+  .map-info { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    position: fixed; inset: 68px 0 auto 0; z-index: 55;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--paper); border-bottom: 1px solid var(--line);
+    padding: 8px var(--gutter) 24px;
+    transform: translateY(-108%); transition: transform .4s var(--ease), visibility .4s;
+    visibility: hidden; pointer-events: none;
+    box-shadow: 0 24px 40px -30px rgba(20,24,29,.4);
+    max-height: calc(100vh - 68px); overflow-y: auto;
+  }
+  .nav.is-open { transform: none; visibility: visible; pointer-events: auto; }
+  .nav a { padding: 15px 0; font-size: 15px; border-bottom: 1px solid var(--line); }
+  .nav a::after { display: none; }
+  .nav a.is-on { color: var(--navy); }
+  .burger { display: flex; }
+  .topbar__inner { justify-content: space-between; gap: 16px; }
+
+  .hero { padding-top: 48px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 48px; }
+  .hero__visual { order: -1; }
+  .cluster-box { max-width: 320px; margin-inline: 0; }
+  .hero__facts div { padding: 10px 0; }
+  .hero__name { font-size: clamp(36px, 9vw, 52px); }
+  .statbar__grid { grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 20px 0; }
+  .stat + .stat { border-left: 0; padding-left: 0; }
+  .stat:nth-child(even) { border-left: 1px solid var(--line); padding-left: 24px; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+
+  .sec { padding-block: 60px; }
+  .sec-head { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 32px; }
+  .sec-num { order: -1; }
+
+  .pi-card { grid-template-columns: 1fr; gap: 28px; padding: 26px; }
+  .pi-card__side { border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 24px; display: flex; gap: 20px; align-items: center; }
+  .pi-avatar { width: 96px; flex: none; }
+  .pi-card__side h3 { margin-top: 0; }
+
+  .research-intro { grid-template-columns: 1fr; gap: 32px; }
+  .dir { grid-template-columns: 1fr; gap: 20px; padding-block: 36px; }
+  .join-grid { grid-template-columns: 1fr; gap: 36px; }
+  .join-aside { position: static; }
+
+  .proj { grid-template-columns: 1fr; gap: 12px; }
+  .proj__side { text-align: left; display: flex; gap: 20px; align-items: baseline; }
+  .proj__side b { font-size: 15px; }
+
+  .mini-pub { grid-template-columns: 1fr; gap: 8px; }
+  .mini-pub__y { order: -1; }
+  .mini-pub__j { font-size: 12.5px; }
+
+  .news-item { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding: 20px 0; }
+  .news-item__date { display: flex; align-items: baseline; gap: 8px; padding-top: 0; grid-column: 1; grid-row: 1; }
+  .news-item__date b { font-size: 13.5px; }
+  .news-item__kind { flex-direction: row; align-items: center; grid-column: 2; grid-row: 1; justify-self: end; }
+  .news-item > div:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .news-updated { margin-left: 0; width: 100%; padding-top: 6px; }
+
+  .pub { grid-template-columns: 1fr; gap: 8px; }
+  .pub__badges { justify-content: flex-start; }
+  .aggregator-note { grid-template-columns: 1fr; gap: 16px; }
+  .footer__grid { grid-template-columns: 1fr; gap: 32px; padding-block: 40px 28px; }
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: 20px; }
+  body { font-size: 15px; }
+  .brand__text small { display: none; }
+  .cluster-box { max-width: 240px; }
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+  .member--ghost { display: none; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .hero__facts { grid-template-columns: 1fr; }
+  .hero__facts div { padding: 10px 0; border-top: 1px solid var(--line); }
+  .hero__facts div:first-child { border-top: 0; }
+  .hero__facts div { display: flex; justify-content: space-between; align-items: baseline; }
+  .hero__facts dt { margin: 0; }
+  .hero__facts dd { margin: 0; }
+  .sec-head h2 { font-size: 24px; }
+  .search { margin-left: 0; width: 100%; }
+  .pub-toolbar { gap: 10px; }
+  .tabs { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+  .dir__points li { grid-template-columns: 14px minmax(0,1fr); }
+  .honor-list li { grid-template-columns: 1fr; gap: 4px; }
+  .map-card { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; gap: 8px; }
+  .stat b { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  .topbar, .footer, .burger, .lang, .news-toolbar, .pub-toolbar { display: none !important; }
+  .view { display: block !important; }
+  body { background: #fff; }
+}
+
+/* ---------- 18. 嵌入模式（?embed=1，供 iframe 内嵌使用） ---------- */
+/* 宿主页面已有学校标识与页脚，此处只保留栏目导航，避免重复署名 */
+html.is-embed .topbar { position: static; }
+html.is-embed .topbar__inner { height: 54px; gap: 20px; }
+html.is-embed .brand,
+html.is-embed .skip,
+html.is-embed .footer { display: none; }
+html.is-embed .hero { padding-top: 40px; }
+html.is-embed .nav a { padding: 7px 10px; font-size: 13px; }
+
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317334f'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c8a16a'/%3E%3Ccircle cx='16' cy='7' r='2' fill='%23faf9f6'/%3E%3Ccircle cx='24' cy='20' r='2' fill='%23faf9f6'/%3E%3Ccircle cx='8' cy='20' r='2' fill='%23faf9f6'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="topbar" id="topbar">
+  <div class="topbar__inner wrap">
+    <a class="brand" href="#/home" aria-label="裴玮课题组 首页">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="4.2" fill="currentColor"/>
+          <circle cx="18" cy="6.6" r="2.4" fill="currentColor" opacity=".55"/>
+          <circle cx="27.9" cy="12.3" r="2.4" fill="currentColor" opacity=".55"/>
+          <circle cx="27.9" cy="23.7" r="2.4" fill="currentColor" opacity=".55"/>
+          <circle cx="18" cy="29.4" r="2.4" fill="currentColor" opacity=".55"/>
+          <circle cx="8.1" cy="23.7" r="2.4" fill="currentColor" opacity=".55"/>
+          <circle cx="8.1" cy="12.3" r="2.4" fill="currentColor" opacity=".55"/>
+          <path d="M18 6.6 27.9 12.3 27.9 23.7 18 29.4 8.1 23.7 8.1 12.3Z" stroke="currentColor" stroke-width=".9" opacity=".4"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <strong data-i18n="brand">裴玮课题组</strong>
+        <small data-i18n="brandSub">团簇物理与计算材料 · 扬州大学</small>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="主导航">
+      <a href="#/home" data-nav="home" data-i18n="nav.home">首页</a>
+      <a href="#/team" data-nav="team" data-i18n="nav.team">成员介绍</a>
+      <a href="#/research" data-nav="research" data-i18n="nav.research">研究方向</a>
+      <a href="#/publications" data-nav="pubs" data-i18n="nav.pubs">科研成果</a>
+      <a href="#/news" data-nav="news" data-i18n="nav.news">新闻动态</a>
+      <a href="#/join" data-nav="join" data-i18n="nav.join">招生招聘</a>
+      <a href="#/contact" data-nav="contact" data-i18n="nav.contact">联系方式</a>
+    </nav>
+
+    <div class="topbar__tools">
+      <div class="lang" role="group" aria-label="Language / 语言">
+        <button type="button" data-lang="zh" class="is-on">中</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="打开导航菜单">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="view" id="view-home" data-view="home"></section>
+  <section class="view" id="view-team" data-view="team"></section>
+  <section class="view" id="view-research" data-view="research"></section>
+  <section class="view" id="view-publications" data-view="publications"></section>
+  <section class="view" id="view-news" data-view="news"></section>
+  <section class="view" id="view-join" data-view="join"></section>
+  <section class="view" id="view-contact" data-view="contact"></section>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<noscript>
+  <div style="max-width:640px;margin:80px auto;padding:24px;font-family:system-ui;line-height:1.8">
+    本站内容由脚本渲染，请启用 JavaScript 后浏览。
+  </div>
+</noscript>
+
+<script>
+window.__NEWS_DATA__ = {"updated": "2026-11-01", "generated": "2026-11-01T17:03:38+08:00", "subject": "裴玮", "queries": {"web": ["裴玮 扬州大学 团簇", "裴玮 超原子 团簇", "扬州大学 裴玮 JACS", "\"Wei Pei\" Yangzhou University cluster"], "wechat": ["裴玮 扬州大学", "裴玮 团簇", "裴玮 JACS"]}, "items": [{"date": "2026-10-25", "type": "media", "pl": "wechat", "src": {"zh": "计算材料学（微信公众号）", "en": "计算材料学（微信公众号）"}, "t": {"zh": "(纯计算) 扬州大学 /南京理工大学Phys. Rev. B: CrI3/α-In2Se3异质结中铁电极化切换的超快自旋动力学", "en": "(纯计算) 扬州大学 /南京理工大学Phys. Rev. B: CrI3/α-In2Se3异质结中铁电极化切换的超快自旋动力学"}, "d": {"zh": "在线发表了 扬州大学 裴玮 副教授、张秀云教授和南京理工大学孙久雨副教授课题组的研究论文,题目为《Ferroelectric polarization ...", "en": "在线发表了 扬州大学 裴玮 副教授、张秀云教授和南京理工大学孙久雨副教授课题组的研究论文,题目为《Ferroelectric polarization ..."}, "u": "https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgSyXYC9brqdIU3johxJqJrbw--xHkZjWfilqXa8Fplpd9PssNlbInf1hK4zdmP0EI5V_dvRXzr9FBxwgZ08Mq0nmiKk0bDTN19MISPckFMlScvrslhmdVdUtxyPusXXSV5CY-S71y1pXgsARcMTOFyum_bXqTYwyl7d3y0c1D8VtUVDLJyA9GorXfiH_1pIYqt-XeNOxaMsa4jH_S2OXO4XBf_71bqkOtiw..&type=2&query=%E8%A3%B4%E7%8E%AE %E6%89%AC%E5%B7%9E%E5%A4%A7%E5%AD%A6&token=DB065F29F561A8167A7C2549349AF9CA7A15EF096AE70066"}, {"date": "2024-03-14", "type": "media", "pl": "wechat", "src": {"zh": "材料信息学MaterialsInformatics（微信公众号）", "en": "材料信息学MaterialsInformatics（微信公众号）"}, "t": {"zh": "Journal of Materials Informatics 青年编委入选名单揭晓!", "en": "Journal of Materials Informatics 青年编委入选名单揭晓!"}, "d": {"zh": "刘军北京化工大学11刘伟浙江农林大学12卢东香港理工大学13孟佳琳复旦大学14裴贵尚首尔国立大学15 裴玮 扬州大学 16萨百晟福州大...", "en": "刘军北京化工大学11刘伟浙江农林大学12卢东香港理工大学13孟佳琳复旦大学14裴贵尚首尔国立大学15 裴玮 扬州大学 16萨百晟福州大..."}, "u": "https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgSyXYC9brqdIU3johxJqJrbw--xHkZjWfilqXa8Fplpd9LCZiPEvzhSF6ClH-CNPm9wRgp307XwSH6iR7en9MqW4VrIcJIS_jmRZv5MmB1sgYb-SCtJ2W9oi9CAWTM9batXkc6jG4h_KF_biINvNzhce71-wjkQe0huGg57k7QQtb4oAgOtEgyyKwayhRCdifZAZj7yhMnvrerO3LpdnKOGUtPujwwRB2Pw..&type=2&query=%E8%A3%B4%E7%8E%AE %E6%89%AC%E5%B7%9E%E5%A4%A7%E5%AD%A6&token=DB065F29F561A8167A7C2549349AF9CA7A15EF096AE70066"}, {"date": "2024-01-08", "type": "media", "pl": "wechat", "src": {"zh": "材料信息学MaterialsInformatics（微信公众号）", "en": "材料信息学MaterialsInformatics（微信公众号）"}, "t": {"zh": "扬州大学 裴玮 &涂育松,华南师范大学周思JMI研究论文:计算设计用于氮还原反应的空间受限三原子催化剂", "en": "扬州大学 裴玮 &涂育松,华南师范大学周思JMI研究论文:计算设计用于氮还原反应的空间受限三原子催化剂"}, "d": {"zh": "扬州大学 涂育松教授、 裴玮 博士联合华南师范大学赵纪军教授、周思教授课题组,基于第一性原理计算,设计了一系列负载在C3N3上...", "en": "扬州大学 涂育松教授、 裴玮 博士联合华南师范大学赵纪军教授、周思教授课题组,基于第一性原理计算,设计了一系列负载在C3N3上..."}, "u": "https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgSyXYC9brqdIU3johxJqJrbw--xHkZjWfilqXa8Fplpd9LCZiPEvzhSF6ClH-CNPm9wRgp307XwSH6iR7en9MqW4VrIcJIS_jmYypy4EVUQ30POg0W5bVEBrdqKI2vFtaeJ1KFbhBAnjwNOjFyJfczENZq2JyJaM7KiJ3upVLK4zACblaxu-6PHmLoXjCsvPXOGoy0r2JRJqT8vY6EeI2W1Jf_71bqkOtiw..&type=2&query=%E8%A3%B4%E7%8E%AE %E6%89%AC%E5%B7%9E%E5%A4%A7%E5%AD%A6&token=DB065F29F561A8167A7C2549349AF9CA7A15EF096AE70066"}]};
+/* ==========================================================================
+   data.js — 课题组内容数据层
+   所有对外文案均为中英双语：{ zh, en }
+   论文条目字段：y 年份 / a 作者 / j 期刊 / d 卷页或 DOI / n 备注 / u 链接 / sel 首页精选
+   ========================================================================== */
+
+window.LAB = {
+  meta: {
+    updated: "2026-11-01",
+    version: "1.0"
+  },
+
+  /* ---------------- 负责人 ---------------- */
+  profile: {
+    name: { zh: "裴玮", en: "Wei Pei" },
+    nameEn: "Wei Pei",
+    role: { zh: "副教授 · 博士生导师", en: "Associate Professor · Ph.D. Supervisor" },
+    roleShort: { zh: "副教授", en: "Associate Professor" },
+    affil: {
+      zh: "扬州大学 物理科学与技术学院（集成电路学院）",
+      en: "School of Physical Science and Technology (School of Integrated Circuits), Yangzhou University"
+    },
+    discipline: { zh: "凝聚态物理", en: "Condensed Matter Physics" },
+    group: { zh: "团簇物理与计算材料", en: "Cluster Physics & Computational Materials" },
+    office: { zh: "物理科学与技术学院 318 室", en: "Room 318, School of Physical Science and Technology" },
+    email: "pwei@yzu.edu.cn",
+    orcid: "0000-0002-7367-4618",
+    orcidUrl: "https://orcid.org/0000-0002-7367-4618",
+    rgUrl: "https://www.researchgate.net/profile/Wei-Pei-6/research",
+    homeUrl: "https://teacher.yzu.edu.cn/PW/zh_CN/index/497143/list/index.htm",
+    address: {
+      zh: "中国·江苏省扬州市大学南路 88 号 扬州大学物理科学与技术学院",
+      en: "School of Physical Science and Technology, Yangzhou University, 88 Daxue South Road, Yangzhou, Jiangsu, China"
+    },
+    postcode: "225009",
+    tel: "86-0514-87991201",
+    intro: [
+      {
+        zh: "裴玮，扬州大学物理科学与技术学院（集成电路学院）副教授、博士生导师。2017—2022 年就读于大连理工大学物理系（保送直博），师从周思教授（国家优青）与赵纪军教授（长江学者、万人领军），获凝聚态物理理学博士学位；2022 年 7 月入职扬州大学，2024 年 7 月晋升副教授，2026 年 10 月破格遴选为博士生导师。",
+        en: "Wei Pei is an Associate Professor and Ph.D. supervisor at the School of Physical Science and Technology (School of Integrated Circuits), Yangzhou University. He received his B.S. in Materials Physics from Northwest Normal University in 2017 and his Ph.D. in Condensed Matter Physics from Dalian University of Technology in 2022, working with Prof. Si Zhou and Prof. Jijun Zhao. He joined Yangzhou University in July 2022, was promoted to Associate Professor in July 2024, and was appointed Ph.D. supervisor in October 2026."
+      },
+      {
+        zh: "课题组以原子精确的配体保护金属团簇为核心体系，围绕「结构—电子结构—激发态动力学—器件功能」这条主线，综合第一性原理计算、非绝热分子动力学与量子输运模拟，理解团簇的发光、磁性、催化与电输运行为，并据此设计单团簇光电子与自旋电子器件。迄今发表 SCI 论文 60 余篇，其中第一/通讯作者 30 篇，累计他引 2700 余次，h 因子 23，4 篇入选 ESI 高被引论文、1 篇入选 ESI 热点论文。",
+        en: "The group works on atomically precise ligand-protected metal clusters, following a single thread from structure to electronic structure, excited-state dynamics, and device function. Combining first-principles calculations, nonadiabatic molecular dynamics, and quantum transport simulations, we aim to understand luminescence, magnetism, catalysis, and charge transport in clusters, and to design single-cluster optoelectronic and spintronic devices. He has published over 60 SCI papers (30 as first/corresponding author) with more than 2,700 citations and an h-index of 23; four papers are ESI Highly Cited and one is an ESI Hot Paper."
+      }
+    ],
+    timeline: [
+      { t: "2026.10", zh: "博士生导师（破格遴选）", en: "Ph.D. supervisor (early appointment)", place: { zh: "扬州大学", en: "Yangzhou University" } },
+      { t: "2024.07", zh: "副教授", en: "Associate Professor", place: { zh: "扬州大学 物理科学与技术学院", en: "School of Physical Science and Technology, YZU" } },
+      { t: "2022.07", zh: "讲师", en: "Lecturer", place: { zh: "扬州大学 物理科学与技术学院", en: "School of Physical Science and Technology, YZU" } },
+      { t: "2017.09–2022.06", zh: "理学博士 · 凝聚态物理（保送直博）", en: "Ph.D. in Condensed Matter Physics", place: { zh: "大连理工大学（导师：周思、赵纪军）", en: "Dalian University of Technology (Advisors: S. Zhou, J. Zhao)" } },
+      { t: "2013.09–2017.06", zh: "理学学士 · 材料物理", en: "B.S. in Materials Physics", place: { zh: "西北师范大学", en: "Northwest Normal University" } }
+    ]
+  },
+
+  /* ---------------- 关键数据 ---------------- */
+  stats: [
+    { n: "60", suffix: "+", zh: "SCI 论文", en: "SCI papers", note: { zh: "累计发表", en: "total" } },
+    { n: "30", suffix: "", zh: "第一 / 通讯作者", en: "first / corresponding", note: { zh: "独立成果", en: "as lead author" } },
+    { n: "2700", suffix: "+", zh: "他引次数", en: "citations", note: { zh: "Web of Science", en: "Web of Science" } },
+    { n: "23", suffix: "", zh: "h 因子", en: "h-index", note: { zh: "4 篇 ESI 高被引", en: "4 ESI highly cited" } }
+  ],
+
+  /* ---------------- 研究方向 ---------------- */
+  research: [
+    {
+      id: "cluster",
+      short: { zh: "配体保护的核壳团簇如何形成超原子壳层，内核与金笼的耦合又如何改写它的激子与偶极。", en: "How ligand-protected core-shell clusters form superatomic shells, and how core-shell coupling rewrites their excitons and dipoles." },
+      idx: "01",
+      title: { zh: "团簇物理与超原子电子结构", en: "Cluster physics & superatomic electronics" },
+      sub: { zh: "几何、壳层与核壳耦合", en: "Geometry, shell closure, core–shell coupling" },
+      lead: {
+        zh: "原子精确的配体保护金属团簇，是连接原子、分子与宏观凝聚态物质的桥梁。它们的电子结构可以用「超原子」语言描述：自由电子按 1S²1P⁶1D¹⁰… 的壳层填充，表现出类原子的闭壳层稳定性。我们关心的是，当内核换一个原子、配体换一种构型，这套壳层如何重组，以及重组带来的性质改变。",
+        en: "Atomically precise ligand-protected metal clusters bridge atoms, molecules and bulk condensed matter. Their electrons can be described in a superatomic language, filling 1S²1P⁶1D¹⁰… shells and exhibiting atom-like closed-shell stability. We ask how this shell structure reorganises when the core atom or the ligand shell is changed, and what property changes follow."
+      },
+      points: [
+        { zh: "核壳型 M@Au₁₂ 团簇的几何构型、电子壳层填充与超原子轨道判定", en: "Geometry, shell filling and superatomic orbital assignment in core–shell M@Au₁₂ clusters" },
+        { zh: "内核杂原子与外围金笼的电子耦合强度，及其对激子离域与偶极矩的调控", en: "Core–shell electronic coupling and its control over exciton delocalisation and dipole moment" },
+        { zh: "团簇结构稳定性、表面活性位点与配体壳层屏蔽效应的微观机制", en: "Structural stability, surface active sites, and the screening role of the ligand shell" }
+      ],
+      tags: ["M@Au₁₂", "superatom", "core–shell", "ligand effect"]
+    },
+    {
+      id: "dynamics",
+      short: { zh: "发光效率由激发态能量的去向决定——我们在飞秒尺度追踪载流子的俘获、复合与耗散。", en: "Emission efficiency is decided by where excited-state energy goes; we track carrier trapping, recombination and dissipation on femtosecond timescales." },
+      idx: "02",
+      title: { zh: "激发态动力学与非绝热过程", en: "Excited-state & nonadiabatic dynamics" },
+      sub: { zh: "飞秒尺度的能量耗散", en: "Femtosecond energy dissipation" },
+      lead: {
+        zh: "发光效率的高低，往往不取决于基态有多稳定，而取决于激发态能量在飞秒到皮秒之间走向了哪条通道。我们用非绝热分子动力学在原子尺度追踪载流子的俘获、复合与能量转移，解释量子点与团簇发光的微观机理。",
+        en: "Luminescence efficiency is rarely decided by ground-state stability; it is decided by which channel the excited-state energy takes within femtoseconds to picoseconds. Using nonadiabatic molecular dynamics we track carrier trapping, recombination and energy transfer at the atomic scale, explaining the microscopic origin of emission in quantum dots and clusters."
+      },
+      points: [
+        { zh: "非绝热分子动力学（NAMD）模拟载流子俘获、复合与界面能量转移", en: "NAMD simulations of carrier trapping, recombination and interfacial energy transfer" },
+        { zh: "量子点发光特性的微观机理与非辐射损失通道的识别", en: "Microscopic origin of quantum-dot emission and identification of nonradiative loss channels" },
+        { zh: "电子–声子耦合、热电子弛豫与光激发自旋动力学", en: "Electron–phonon coupling, hot-carrier relaxation, and photoexcited spin dynamics" }
+      ],
+      tags: ["NAMD", "electron–phonon", "carrier dynamics", "quantum-dot emission"]
+    },
+    {
+      id: "design",
+      short: { zh: "先写下想要的发光波长、磁各向异性或催化活性，再回到组分、配体与对称性中去找结构。", en: "State the desired emission wavelength, magnetic anisotropy or activity first, then search composition, ligand and symmetry for a structure that delivers it." },
+      idx: "03",
+      title: { zh: "功能团簇的逆向设计", en: "Inverse design of functional clusters" },
+      sub: { zh: "从目标性质反推结构", en: "From target property back to structure" },
+      lead: {
+        zh: "传统做法是先合成、再表征、再理解；逆向设计把顺序倒过来——先写下想要的发光波长、磁各向异性或催化活性，再在组分、配体与对称性构成的空间里搜索能够实现它的结构。这需要可靠的性质描述符，也需要足够高效的筛选策略。",
+        en: "The conventional route is synthesis, then characterisation, then understanding. Inverse design reverses it: state the desired emission wavelength, magnetic anisotropy or catalytic activity first, then search the space of composition, ligand and symmetry for a structure that delivers it. This requires reliable property descriptors and an efficient screening strategy."
+      },
+      points: [
+        { zh: "以发光波长、磁各向异性势垒、催化活性为目标函数的团簇描述符构建", en: "Descriptor construction targeting emission wavelength, magnetic anisotropy barrier and catalytic activity" },
+        { zh: "掺杂元素、配体种类与点群对称性的组合空间搜索与优先级排序", en: "Search and prioritisation over dopant, ligand and point-group symmetry combinations" },
+        { zh: "结构—性质关系图谱，以及与实验合作体系的相互印证", en: "Structure–property maps, cross-validated against experimentally realised systems" }
+      ],
+      tags: ["inverse design", "descriptors", "high-throughput", "symmetry"]
+    },
+    {
+      id: "device",
+      short: { zh: "把单个团簇共价锚定在电极之间，用透射谱与 I–V 曲线读出电场、光场与形变如何调控器件。", en: "Anchor one cluster between two electrodes and read out, through transmission and I-V curves, how field, light and strain tune the device." },
+      idx: "04",
+      title: { zh: "单团簇器件与量子输运", en: "Single-cluster devices & quantum transport" },
+      sub: { zh: "把团簇接进电路", en: "Wiring a cluster into a circuit" },
+      lead: {
+        zh: "把一个团簇共价锚定在两个电极之间，测到的是量子输运，设计的是器件功能。我们结合非平衡格林函数与第一性原理，计算透射谱与 I–V 特性，并考察电场、光场与机械形变如何协同调控电导、自旋态与开关行为。",
+        en: "Anchor a single cluster covalently between two electrodes and what you measure is quantum transport; what you design is device function. Combining the non-equilibrium Green's function formalism with first-principles calculations, we compute transmission spectra and I–V characteristics, and examine how electric, optical and mechanical stimuli jointly tune conductance, spin state and switching behaviour."
+      },
+      points: [
+        { zh: "NEGF-DFT 单团簇结输运计算：透射谱、电流–电压特性与门压调控", en: "NEGF-DFT transport in single-cluster junctions: transmission, I–V characteristics, gate control" },
+        { zh: "光电导开关、自旋阀与自旋过滤效应的理论设计", en: "Theoretical design of photoconductive switches, spin valves and spin-filtering effects" },
+        { zh: "机械形变、静电场与飞秒激光多场调控下的自旋交叉与异构化", en: "Spin crossover and isomerisation under mechanical, electrostatic and femtosecond-laser control" }
+      ],
+      tags: ["NEGF", "single-molecule junction", "spintronics", "optoelectronic switch"]
+    }
+  ],
+
+  pipeline: [
+    { zh: "结构预测与稳定性", en: "Structure & stability", d: { zh: "全局搜索、AIMD、形成能", en: "Global search, AIMD, formation energy" } },
+    { zh: "电子结构与壳层", en: "Electronic structure", d: { zh: "DFT、超原子轨道、TDDFT", en: "DFT, superatomic orbitals, TDDFT" } },
+    { zh: "激发态动力学", en: "Excited-state dynamics", d: { zh: "NAMD、电声耦合、自旋动力学", en: "NAMD, e–ph coupling, spin dynamics" } },
+    { zh: "量子输运", en: "Quantum transport", d: { zh: "NEGF、透射谱、I–V", en: "NEGF, transmission, I–V" } },
+    { zh: "器件功能设计", en: "Device function", d: { zh: "开关比、自旋过滤、门控", en: "On/off ratio, spin filtering, gating" } }
+  ],
+
+  /* ---------------- 论文 ---------------- */
+  papers: [
+    /* 2026 */
+    { y: 2026, a: "Y. Song, Y. Zhou, X. Yu*, S. Zhou*, W. Pei*, J. Zhao", j: "Inorg. Chem.", d: "DOI: 10.1021/acs.inorgchem.6c02063", n: "本科生一作" },
+    { y: 2026, a: "X. Yu*, Q. Gao, B. Li, W. Pei*, X. Zhang, Y. Su, J. Zhao", j: "J. Phys. Chem. Lett.", d: "17, 7094" },
+    { y: 2026, a: "T. Du, W. Pei*, P. Han, X. Yang, J. Zhao*, S. Zhou*", j: "Mater. Futures", d: "DOI: 10.1088/2752-5724/ae828c", u: "http://iopscience.iop.org/article/10.1088/2752-5724/ae828c" },
+    { y: 2026, a: "Y. Zhou, Y. Song, X. Yu*, S. Zhou*, W. Pei*, J. Zhao", j: "J. Am. Chem. Soc.", d: "148, 27688–27696", u: "https://doi.org/10.1021/jacs.6c07842", sel: true, t: "Structure-Induced Spin Switching in Triple-Decker Metal–Ring–Metal Nanoclusters" },
+
+    /* 2025 */
+    { y: 2025, a: "W. Pei*, P. Han, S. Zhou*, X. Yu*, J. Zhao", j: "J. Am. Chem. Soc.", d: "147, 45832–45839", u: "https://doi.org/10.1021/jacs.5c19434", sel: true, t: "Fully Reversible Photoelectronic Switching Enabled by Delocalized Excitons in a Single Superatom Junction" },
+    { y: 2025, a: "J. Yang, J. Zhou, X. Yu, W. Pei*, S. Zhou, J. Zhao", j: "Adv. Funct. Mater.", d: "2507144", u: "https://doi.org/10.1002/adfm.202507144", sel: true, t: "Heteroatomic Doping Induces High-low Spin Isomers in Atomically Precise Au Nanoclusters" },
+    { y: 2025, a: "Y. Zhou, J. Zhou, X. Yu, W. Pei*, S. Zhou, J. Zhao", j: "J. Phys. Chem. Lett.", d: "16, 8613–8620" },
+    { y: 2025, a: "J. Zhou, J. Yang, X. Yu, Y. Liu, S. Zhou*, J. Zhao, W. Pei*", j: "Appl. Phys. Lett.", d: "126" },
+    { y: 2025, a: "J. Zhou, J. Yang, X. Yu, Y. Liu, W. Pei*, S. Zhou, J. Zhao", j: "Appl. Phys. Lett.", d: "127" },
+    { y: 2025, a: "X. Yu, W. Pei, W.-w. Xu, Y. Su, J. Zhao", j: "Inorg. Chem.", d: "64, 1561–1568" },
+    { y: 2025, a: "X. Yu, Q. Gao, B. Li, W. Pei, Y. Su, X. Zhang, Y. Liu, J. Zhao", j: "J. Phys. Chem. Lett.", d: "16, 6988–6995" },
+    { y: 2025, a: "Q. Xie, L. Luo, D. Yan, D. Wu, X. Tang, M. Cai, R. Fan, W. Pei, S. Tian, Y. Tu", j: "Appl. Phys. Lett.", d: "127" },
+    { y: 2025, a: "J. Tian, L. Hou, W. Pei, X. Yu", j: "Surf. Interfaces", d: "56, 105691", n: "本科生一作" },
+    { y: 2025, a: "Y. Song, J. Yang, Y. Zhou, X. Yu, S. Zhou, J. Zhao, W. Pei", j: "J. Phys. D: Appl. Phys.", d: "58, 385302", n: "本科生一作" },
+    { y: 2025, a: "N. Liu, P. Wang, H. Lin, W. Pei*", j: "J. Phys. Chem. A", d: "129, 1616–1622" },
+    { y: 2025, a: "W. Huang, W. Zhao, Z. Guo, S. Du, J. Tian, R. Zhang, H. Han, Z. Zhao, W. Pei, R. Shi", j: "RSC Adv.", d: "15, 36084–36092" },
+    { y: 2025, a: "T. Du, X. Yang, W. Pei, P. Han, Y. Feng, J. Zhao, S. Zhou", j: "APL Quantum", d: "2" },
+    { y: 2025, a: "B. Li, Q. Gao, W. Pei, X. Zhang, Y. Liu, X. Yu, Y. Su, J. Zhao", j: "Phys. Rev. B", d: "112, 205414" },
+    { y: 2025, a: "W. Yu, X. Wang, H. Zhu, Q. Xie, L. Zhao, W. Pei, D. Yan, S. Tian, Y. Liu", j: "Inorg. Chem.", d: "2025" },
+
+    /* 2024 */
+    { y: 2024, a: "W. Pei*, L. Hou, X. Yu, W. Xia, Z. Wang, Y. Liu, S. Zhou, Y. Tu, J. Zhao", j: "J. Catal.", d: "429, 115232" },
+    { y: 2024, a: "W. Pei*, Z. Wang, W. Xia, Z. Huang, P. Wang, Y. Liu, S. Zhou, Y. Tu, J. Zhao", j: "J. Phys. Chem. Lett.", d: "15, 1161–1171" },
+    { y: 2024, a: "W. Pei*, L. Hou, Z. Wang, J. Tian, Y. Liu, Y. Tu, J. Zhao, S. Zhou", j: "J. Phys. Chem. Lett.", d: "15, 7708–7715" },
+    { y: 2024, a: "W. Pei*, L. Hou, J. Yang, S. Zhou, J. Zhao", j: "Nanoscale", d: "16, 14081–14088" },
+    { y: 2024, a: "P. Wang, W. Xia, N. Liu, W. Pei*, S. Zhou, Y. Tu, J. Zhao", j: "J. Chem. Phys.", d: "160" },
+    { y: 2024, a: "C. Shang, H. Dong, Y. Zhao, W. Pei, J. Zhao, J. Zhou, S. Zhou", j: "Phys. Rev. B", d: "110, 235428" },
+    { y: 2024, a: "B. D. Peter, W. Pei#, G. N. Andrew, S. Zhou, Z. Luo", j: "Nanoscale", d: "16, 8090–8095" },
+    { y: 2024, a: "Y. Liu*, Y. Ying, Q. Xie, Z. Gao, X. Shao, M. Zhou, W. Pei, X. Tang, Y. Tu", j: "Inorg. Chem.", d: "63, 16167–16176" },
+    { y: 2024, a: "Y. Liu*, Q. Xie, Y. Ying, Z. Gao, X. Shao, W. Xia, M. Zhou, W. Pei, X. Tang, Y. Tu", j: "Chem. Eng. J.", d: "498, 155515" },
+    { y: 2024, a: "Y. Liu*, X. Wang, Z. Gao, W. Yu, J. Yang, F. Xu, W. Pei, J. Wang, M. Zhou", j: "Adv. Mater. Interfaces", d: "11, 2400385" },
+    { y: 2024, a: "Y. Liu*, X. Shao, Z. Gao, Q. Xie, Y. Ying, X. Zhu, Z. Pan, J. Yang, H. Lin, X. Tang, W. Chen, W. Pei, Y. Tu", j: "Small", d: "20, 2305664" },
+    { y: 2024, a: "Z. Gao, X. Shao, Z. Huang, Q. Xie, Y. Ying, H. Lin, J. Wang, X. Tang, W. Chen, W. Pei, Y. Tu, Y. Liu*", j: "Appl. Phys. Lett.", d: "124, 041106" },
+
+    /* 2023 */
+    { y: 2023, a: "W. Pei*, W. Xia, X. Yu, L. Hou, P. Wang, Y. Liu, S. Zhou, Y. Tu, J. Zhao", j: "Appl. Surf. Sci.", d: "641, 158509" },
+    { y: 2023, a: "W. Pei*, J. She, X. Yu, S. Zhou, J. Zhao", j: "J. Phys. D: Appl. Phys.", d: "56, 445304" },
+    { y: 2023, a: "H. Li, W. Pei*, X. Yang, S. Zhou, J. Zhao", j: "Chin. Chem. Lett.", d: "34, 108292" },
+    { y: 2023, a: "J. Tian, L. Hou, W. Xia, Z. Wang, Y. Tu, W. Pei*, S. Zhou, J. Zhao", j: "Phys. Chem. Chem. Phys.", d: "25, 28533–28540", n: "本科生一作" },
+    { y: 2023, a: "Y. Guo, Y. Zhao, W. Pei, S. Zhou*, J. Zhao", j: "J. Mater. Chem. A", d: "11, 16059–16067" },
+    { y: 2023, a: "X. Yu, W. Pei, W.-w. Xu, Y. Zhao, Y. Su, J. Zhao", j: "Inorg. Chem.", d: "62, 20450–20457" },
+    { y: 2023, a: "X. Zhu, Z. Pan, T. Xu, X. Shao, Z. Gao, Q. Xie, Y. Ying, W. Pei, H. Lin, J. Wang, X. Tang, W. Chen, Y. Liu*", j: "Inorg. Chem.", d: "62, 9190–9198" },
+    { y: 2023, a: "L. Zhao, W. Luo, Z. Huang, Z. Yan, H. Jia, W. Pei, Y. Tu*", j: "Appl. Surf. Sci.", d: "613, 155912" },
+    { y: 2023, a: "Y. Liu*, X. Shao, Z. Gao, X. Zhu, Z. Pan, Y. Ying, J. Yang, W. Pei, J. Wang", j: "J. Lumin.", d: "257, 119693" },
+
+    /* 2022 */
+    { y: 2022, a: "W. Pei, P. Wang, S. Zhou*, J. Zhao", j: "J. Phys. Chem. Lett.", d: "13, 2523–2532" },
+    { y: 2022, a: "J. She, W. Pei, S. Zhou*, J. Zhao", j: "J. Phys. Chem. Lett.", d: "13, 5873–5880" },
+    { y: 2022, a: "X. Zhang, Z. Li, W. Pei, G. Li, W. Liu, P. Du, Z. Wang, Z. Qin, H. Qi, X. Liu, S. Zhou*, J. Zhao, B. Yang*, W. Shen", j: "ACS Catal.", d: "12, 3634–3643" },
+
+    /* 2021 */
+    { y: 2021, a: "D. Yang#, W. Pei#, Y. Zhang, W. Hu, X. Cai, Y. Sun, S. Li, X. Cheng, S. Zhou*, J. Zhao, Y. Zhu*, W. Ding, X. Liu", j: "Nano Res.", d: "14, 807–813" },
+    { y: 2021, a: "P. Su#, W. Pei#, X. Wang, Y. Ma, Q. Jiang, J. Liang, S. Zhou*, J. Zhao, J. Liu*, G. Q. Lu", j: "Angew. Chem. Int. Ed.", d: "60, 16044–16050" },
+    { y: 2021, a: "S. Zhou, X. Yang, W. Pei, Z. Jiang, J. Zhao*", j: "J. Phys. Energy", d: "3, 012002" },
+    { y: 2021, a: "S. Zhou, W. Pei, Y. Zhao, X. Yang, N. Liu, J. Zhao*", j: "npj Comput. Mater.", d: "7, 186" },
+    { y: 2021, a: "H. Liu, W.-H. Lai, Y. Liang, X. Liang, Z.-C. Yan, H.-L. Yang, Y.-J. Lei, P. Wei, S. Zhou, Q.-F. Gu, S.-L. Chou*, H. K. Liu, S. X. Dou, Y.-X. Wang", j: "J. Mater. Chem. A", d: "9, 566–574" },
+
+    /* 2020 */
+    { y: 2020, a: "W. Pei, S. Zhou*, J. Zhao, X. Xu, Y. Du, S. X. Dou", j: "Nano Energy", d: "76, 105049" },
+    { y: 2020, a: "W. Pei, S. Zhou*, Y. Bai", j: "J. Cluster Sci.", d: "31, 627–635" },
+    { y: 2020, a: "D. Yang#, W. Pei#, S. Zhou*, J. Zhao, W. Ding, Y. Zhu*", j: "Angew. Chem. Int. Ed.", d: "59, 1919–1924" },
+    { y: 2020, a: "L. Xiu#, W. Pei#, S. Zhou#, Z. Wang*, P. Yang, J. Zhao, J. Qiu*", j: "Adv. Funct. Mater.", d: "30, 1910028" },
+    { y: 2020, a: "Y. Sun#, W. Pei#, M. Xie, S. Xu, S. Zhou*, J. Zhao, K. Xiao, Y. Zhu*", j: "Chem. Sci.", d: "11, 2440–2447" },
+    { y: 2020, a: "H. Liu, W. Pei, W.-H. Lai, Z. Yan, H. Yang, Y. Lei, Y.-X. Wang, Q. Gu, S. Zhou, S. Chou*, H. K. Liu, S. X. Dou", j: "ACS Nano", d: "14, 7259–7268" },
+    { y: 2020, a: "Z. Kou, W. Zang, W. Pei, L. Zheng, S. Zhou, S. Zhang, L. Zhang, J. Wang", j: "J. Mater. Chem. A", d: "8, 3071–3082" },
+
+    /* 2019 */
+    { y: 2019, a: "M. Yu#, S. Zhou#, Z. Wang, W. Pei, X. Liu, C. Liu, C. Yan, X. Meng, S. Wang, J. Zhao, J. Qiu", j: "Adv. Funct. Mater.", d: "29, 1905986" },
+    { y: 2019, a: "W. Ye#, W. Pei#, S. Zhou, H. Huang, Q. Li, J. Zhao, R. Lu*, Y. Ge, S. Zhang", j: "J. Mater. Chem. A", d: "7, 10363–10371" },
+    { y: 2019, a: "Y. Li#, W. Pei#, J. He, K. Liu, W. Qi, X. Gao, S. Zhou*, H. Xie, K. Yin, Y. Gao, J. He, J. Zhao, J. Hu, T.-S. Chan, Z. Li, G. Zhang, M. Liu*", j: "ACS Catal.", d: "9, 10870–10875" },
+    { y: 2019, a: "X. Wu, S. Zhou*, Z. Wang, J. Liu, W. Pei, P. Yang, J. Zhao, J. Qiu", j: "Adv. Energy Mater.", d: "9, 1901333" },
+    { y: 2019, a: "S. Zhou, X. Yang, W. Pei, J. Zhao*, A. Du", j: "J. Phys. Chem. C", d: "123, 9973–9980" },
+    { y: 2019, a: "S. Zhou, W. Pei, J. Zhao*, A. Du*", j: "Nanoscale", d: "11, 7734–7743" },
+    { y: 2019, a: "S. Zhou, W. Pei, Q. Du, J. Zhao*", j: "Phys. Chem. Chem. Phys.", d: "21, 10587–10593" },
+
+    /* 2018 */
+    { y: 2018, a: "W. Pei, S. Zhou*, Y. Bai, J. Zhao", j: "Carbon", d: "133, 260–266" },
+    { y: 2018, a: "S. Zhou, X. Yang, W. Pei, N. Liu, J. Zhao*", j: "Nanoscale", d: "10, 10876–10883" }
+  ],
+
+  /* ---------------- 科研项目 ---------------- */
+  projects: [
+    {
+      kind: { zh: "国家自然科学基金 · 面上项目", en: "NSFC · General Program" },
+      amount: "54", unit: { zh: "万元", en: "×10⁴ CNY" },
+      period: "2027.01 – 2030.12",
+      role: { zh: "主持", en: "PI" },
+      title: {
+        zh: "光控「超原子」团簇的异构化动态机制及其超快单团簇器件构筑的理论研究",
+        en: "Theoretical study of photo-controlled isomerisation dynamics in superatomic clusters and the construction of ultrafast single-cluster devices"
+      }
+    },
+    {
+      kind: { zh: "国家自然科学基金 · 青年项目", en: "NSFC · Young Scientists Fund" },
+      amount: "30", unit: { zh: "万元", en: "×10⁴ CNY" },
+      period: "2024.01 – 2026.12",
+      role: { zh: "主持", en: "PI" },
+      title: {
+        zh: "基于配体保护金纳米核壳团簇的单分子光电子器件理论研究和设计",
+        en: "Theoretical study and design of single-molecule optoelectronic devices based on ligand-protected gold core–shell clusters"
+      }
+    },
+    {
+      kind: { zh: "江苏省自然科学基金 · 青年项目", en: "Jiangsu Provincial NSF · Young Scientists" },
+      amount: "20", unit: { zh: "万元", en: "×10⁴ CNY" },
+      period: "2023.09 – 2026.08",
+      role: { zh: "主持", en: "PI" },
+      title: {
+        zh: "核壳电子耦合优化原子精确的金纳米团簇发光及电输运特性的研究",
+        en: "Optimising luminescence and charge transport of atomically precise gold nanoclusters via core–shell electronic coupling"
+      }
+    },
+    {
+      kind: { zh: "江苏省教育厅 · 面上项目", en: "Jiangsu Provincial Department of Education · General Program" },
+      amount: "3", unit: { zh: "万元", en: "×10⁴ CNY" },
+      period: "2023.07 – 2025.07",
+      role: { zh: "主持", en: "PI" },
+      title: {
+        zh: "配体金纳米团簇精准设计单分子器件的理论研究",
+        en: "Theoretical study on the precise design of single-molecule devices from ligand-protected gold nanoclusters"
+      }
+    },
+    {
+      kind: { zh: "国家超级计算天津中心 · 开放课题", en: "National Supercomputer Center in Tianjin · Open Project" },
+      amount: "3", unit: { zh: "万元", en: "×10⁴ CNY" },
+      period: "2024.01 – 2024.12",
+      role: { zh: "主持", en: "PI" },
+      title: {
+        zh: "面向单团簇器件模拟的大规模第一性原理计算",
+        en: "Large-scale first-principles simulation of single-cluster devices"
+      }
+    }
+  ],
+
+  /* ---------------- 荣誉与学术服务 ---------------- */
+  honors: [
+    { t: "2026", zh: "博士生导师（破格遴选）", en: "Ph.D. supervisor (early appointment)" },
+    { t: "2024", zh: "扬州大学校「青蓝工程」优秀青年骨干教师", en: "Outstanding Young Faculty, \"Qinglan Project\", Yangzhou University" },
+    { t: "2023", zh: "扬州市「绿杨金凤」人才计划", en: "\"Lüyang Jinfeng\" Talent Program, Yangzhou City" }
+  ],
+
+  service: {
+    roles: [
+      { zh: "国家自然科学基金委 通讯评审专家", en: "Reviewer, National Natural Science Foundation of China" },
+      { zh: "全国本科毕业论文（设计）抽检评审专家库 专家", en: "Expert, National Review Panel for Undergraduate Theses" },
+      { zh: "《Carbon Neutralization》青年编委（中科院 1 区，Top）", en: "Young Editorial Board, Carbon Neutralization (CAS Tier 1, Top)" },
+      { zh: "《Journal of Materials Informatics》青年编委（中科院 2 区）", en: "Young Editorial Board, Journal of Materials Informatics (CAS Tier 2)" },
+      { zh: "《Frontiers in Chemistry》客座编辑（中科院 2 区）", en: "Guest Editor, Frontiers in Chemistry (CAS Tier 2)" },
+      { zh: "《Nanomaterials》客座编辑（中科院 3 区）", en: "Guest Editor, Nanomaterials (CAS Tier 3)" }
+    ],
+    review: "ACS Catalysis · Applied Physics Letters · J. Phys. Chem. Lett. · Applied Energy · Materials Today Chemistry"
+  },
+
+  /* ---------------- 成员 ---------------- */
+  members: [
+    {
+      key: "grad",
+      title: { zh: "研究生", en: "Graduate students" },
+      note: { zh: "含 2024–2025 届毕业生", en: "Including 2024–2025 cohort" },
+      people: [
+        {
+          zh: "周羽", en: "Yu Zhou", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          notes: [
+            { zh: "2025 年研究生国家奖学金", en: "2025 National Scholarship for Graduate Students" },
+            { zh: "JACS (2026) 第一作者：三层金属–环–金属团簇的结构诱导自旋翻转", en: "First author, JACS (2026): structure-induced spin switching in triple-decker clusters" }
+          ]
+        },
+        {
+          zh: "杨晶", en: "Jing Yang", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          notes: [
+            { zh: "2024 年一等学业奖学金；2025 年研究生国家奖学金", en: "2024 First-class Academic Scholarship; 2025 National Scholarship" },
+            { zh: "AFM (2025) 第一作者：异质原子掺杂诱导 Au 团簇高–低自旋异构", en: "First author, AFM (2025): heteroatom doping induced high–low spin isomers" }
+          ],
+          to: { zh: "华南师范大学 攻读博士", en: "Ph.D. at South China Normal University" }
+        },
+        {
+          zh: "周吉祥", en: "Jixiang Zhou", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          notes: [
+            { zh: "2024 年一等学业奖学金；2025 年研究生国家奖学金", en: "2024 First-class Academic Scholarship; 2025 National Scholarship" },
+            { zh: "Appl. Phys. Lett. (2025) 第一作者（两篇）", en: "First author of two papers in Appl. Phys. Lett. (2025)" }
+          ],
+          to: { zh: "事业单位就业", en: "Public institution" }
+        }
+      ]
+    },
+    {
+      key: "alumni",
+      title: { zh: "已毕业研究生", en: "Alumni" },
+      note: { zh: "2024 届", en: "Class of 2024" },
+      people: [
+        {
+          zh: "侯蕾", en: "Lei Hou", role: { zh: "2024 届硕士", en: "M.Sc. 2024" },
+          notes: [
+            { zh: "2024 年研究生国家奖学金、特等学业奖学金", en: "2024 National Scholarship; Presidential Academic Scholarship" },
+            { zh: "J. Catal. / J. Phys. Chem. Lett. / Nanoscale 共同作者", en: "Co-author in J. Catal., J. Phys. Chem. Lett., Nanoscale" }
+          ],
+          to: { zh: "就业", en: "Industry" }
+        },
+        {
+          zh: "王梓", en: "Zi Wang", role: { zh: "2024 届硕士", en: "M.Sc. 2024" },
+          notes: [{ zh: "2024 年研究生特等学业奖学金", en: "2024 Presidential Academic Scholarship" }],
+          to: { zh: "中山大学 攻读博士", en: "Ph.D. at Sun Yat-sen University" }
+        },
+        {
+          zh: "张文雅", en: "Wenya Zhang", role: { zh: "2024 届硕士", en: "M.Sc. 2024" },
+          notes: [{ zh: "2024 年扬州大学优秀毕业生", en: "2024 Outstanding Graduate, Yangzhou University" }],
+          to: { zh: "就业", en: "Industry" }
+        },
+        {
+          zh: "夏伟智", en: "Weizhi Xia", role: { zh: "2024 届硕士", en: "M.Sc. 2024" },
+          notes: [{ zh: "J. Phys. Chem. Lett. / Appl. Surf. Sci. 共同作者", en: "Co-author in J. Phys. Chem. Lett. and Appl. Surf. Sci." }],
+          to: { zh: "就业", en: "Industry" }
+        }
+      ]
+    },
+    {
+      key: "undergrad",
+      title: { zh: "本科生", en: "Undergraduate researchers" },
+      note: { zh: "科研训练与毕业论文", en: "Research training & theses" },
+      people: [
+        {
+          zh: "田佳琪", en: "Jiaqi Tian", role: { zh: "本科生", en: "Undergraduate" },
+          notes: [
+            { zh: "2024 年本科生国家奖学金、扬州大学一等校长奖学金", en: "2024 National Scholarship; First-class Presidential Scholarship" },
+            { zh: "第 18 届「挑战杯」主体赛国家特等奖（成员）", en: "National Grand Prize, 18th \"Challenge Cup\" (team member)" },
+            { zh: "Surf. Interfaces / PCCP 第一作者", en: "First author, Surf. Interfaces and PCCP" }
+          ],
+          to: { zh: "推免南京大学 直博", en: "Direct Ph.D. at Nanjing University" }
+        },
+        {
+          zh: "樊琦琦", en: "Qiqi Fan", role: { zh: "本科生", en: "Undergraduate" },
+          notes: [
+            { zh: "2023、2024 年国家励志奖学金", en: "2023 and 2024 National Inspirational Scholarship" },
+            { zh: "扬州大学第十二届「挑战杯」一等奖", en: "First Prize, 12th \"Challenge Cup\", Yangzhou University" }
+          ],
+          to: { zh: "厦门大学 读研", en: "M.Sc. at Xiamen University" }
+        },
+        {
+          zh: "陈莘", en: "Shen Chen", role: { zh: "本科生", en: "Undergraduate" },
+          notes: [
+            { zh: "2023 年校三好学生、二等校长奖学金", en: "2023 Merit Student; Second-class Presidential Scholarship" },
+            { zh: "全国大学生高数竞赛三等奖、江苏省高数竞赛三等奖", en: "National and Jiangsu provincial mathematics competition awards" }
+          ],
+          to: { zh: "事业单位就业", en: "Public institution" }
+        },
+        {
+          zh: "宋颖", en: "Ying Song", role: { zh: "本科生", en: "Undergraduate" },
+          notes: [
+            { zh: "第 21 届江苏省高校物理实验科技作品竞赛三等奖", en: "Third Prize, 21st Jiangsu Physics Experimental Competition" },
+            { zh: "JACS (2026) / J. Phys. D 共同作者", en: "Co-author, JACS (2026) and J. Phys. D" }
+          ]
+        }
+      ]
+    }
+  ],
+
+  /* ---------------- 新闻动态 ---------------- */
+  news: [
+    {
+      date: "2026-09-01", type: "group", pl: "", src: { zh: "课题组", en: "Group" },
+      t: { zh: "2027 级硕士、博士研究生招生中", en: "Recruiting M.Sc. and Ph.D. students for 2027" },
+      d: { zh: "招收物理学、微电子、光科等方向研究生。欢迎对团簇物理、激发态动力学与计算材料学感兴趣的同学来信联系。", en: "We welcome applicants in physics, microelectronics and optical science with an interest in cluster physics, excited-state dynamics and computational materials science." }
+    },
+    {
+      date: "2026-08-21", type: "talk", pl: "web", src: { zh: "西北师范大学 物理与电子工程学院", en: "College of Physics & Electronic Engineering, NWNU" },
+      t: { zh: "裴玮与于雪克应邀赴西北师大开展学术交流", en: "Invited talks at Northwest Normal University" },
+      d: { zh: "7 月 13 日作题为「单团簇器件的理论设计」的报告，并与材料物理专业学生分享求学经历。", en: "Talk on \"Theoretical design of single-cluster devices\" on 13 July, followed by an informal session with materials physics students." },
+      u: "https://wdxy.nwnu.edu.cn/2026/0821/c2487a282456/page.htm"
+    },
+    {
+      date: "2026-08-05", type: "talk", pl: "web", src: { zh: "兰州理工大学 理学院", en: "School of Science, Lanzhou University of Technology" },
+      t: { zh: "扬州大学裴玮来校学术交流：单团簇器件的理论设计", en: "Seminar at Lanzhou University of Technology" },
+      d: { zh: "应理学院邀请作专题报告，介绍 M@Au₁₂ 核壳团簇中心原子替位掺杂调控超原子物性的最新进展。", en: "Invited seminar covering recent progress on tuning superatomic properties of M@Au₁₂ core–shell clusters via central-atom substitution." },
+      u: "https://lixue.lut.edu.cn/info/1212/8071.htm"
+    },
+    {
+      date: "2026-06-27", type: "media", pl: "wechat", src: { zh: "计算材料学（微信公众号）", en: "Computational Materials (WeChat)" },
+      t: { zh: "（纯计算）扬州大学/华南师范大学 JACS：三层金属–环–金属纳米团簇中结构诱导的自旋翻转", en: "JACS: structure-induced spin switching in triple-decker metal–ring–metal clusters" },
+      d: { zh: "梳理论文投稿与接收时间线，并逐图解读五幅核心图版。", en: "A figure-by-figure walkthrough of the paper, including its submission and acceptance timeline." },
+      u: "http://mp.weixin.qq.com/s?__biz=MzA3NDk5NDA5OA==&mid=2454873413&idx=4&sn=d20ff0938f6d165af96d02126d9af7c4&chksm=894b454bf8ea6e3f1cbddfa446301a7cb89c8ae333e12b8c537dff95fa7f49d571b676a3fc3d#rd"
+    },
+    {
+      date: "2026-06-26", type: "group", pl: "wechat", src: { zh: "扬州大学物理科学与技术学院（微信公众号）", en: "School of Physical Science and Technology, YZU (WeChat)" },
+      t: { zh: "我院青年教师裴玮在单团簇自旋电子学领域取得重要研究进展", en: "Progress in single-cluster spintronics published in JACS" },
+      d: { zh: "研究成果以 Structure-Induced Spin Switching in Triple-Decker Metal–Ring–Metal Nanoclusters 在线发表于 JACS；硕士研究生周羽为第一作者，裴玮、于雪克与周思为共同通讯作者。", en: "The work appeared in JACS, with M.Sc. student Yu Zhou as first author and Wei Pei, Xueke Yu and Si Zhou as co-corresponding authors." },
+      u: "http://mp.weixin.qq.com/s?__biz=MzU0MzUwNTYxOA==&mid=2247688418&idx=1&sn=9cb678c4285d75968da052b6dae9b34f&chksm=fa5ccaff445614ac26bda6d7fae8742bb6e6e8be5adcfa9046ecef3db532cbcb2fe89403fb57#rd"
+    },
+    {
+      date: "2026-06-25", type: "media", pl: "wechat", src: { zh: "化学加（微信公众号）", en: "Huaxuejia (WeChat)" },
+      t: { zh: "【纳米】结构诱导的三层金属–环–金属纳米团簇自旋翻转", en: "Structure-induced spin switching in triple-decker clusters" },
+      d: { zh: "以 [Cp–V(cyclo-Sb₅)V–Cp]⁻ 为模型体系，结合第一性原理、CASSCF 与非平衡格林函数，建立「结构形变—电子重构—磁性翻转—输运响应」的全链条图像。", en: "Using [Cp–V(cyclo-Sb₅)V–Cp]⁻ as a model, first-principles, CASSCF and NEGF methods establish a full chain from structural deformation to electronic reconstruction, magnetic switching and transport response." },
+      u: "http://mp.weixin.qq.com/s?__biz=MzAwOTExNzg4Nw==&mid=2657946527&idx=6&sn=df027d769eb8fc0bc9079c1160b08b2d&chksm=8121a1a1728b7cfddc1b7f0cf1b1f6d30242427840d59f5bf9629e7660affb09a912131021dc#rd"
+    },
+    {
+      date: "2025-12-08", type: "media", pl: "wechat", src: { zh: "扬州大学（微信公众号）", en: "Yangzhou University (WeChat)" },
+      t: { zh: "周讯｜扬州大学新闻集锦：我校青年教师裴玮在 JACS 发表研究论文", en: "University weekly: JACS paper by Wei Pei featured" },
+      d: { zh: "校方周讯收录该成果，介绍单超原子结中离域激子实现的全可逆光电开关。", en: "The university's weekly digest features the work on fully reversible photoelectronic switching via delocalised excitons." },
+      u: "http://mp.weixin.qq.com/s?__biz=Mzg4NTk3ODkyNw==&mid=2247547200&idx=1&sn=6329bc79588e45bfa489aa765065664d&chksm=cee3babd8b64fe7d4a307e766dbe12d83c4614112356cbe42d57fef602d42ffed5b11ee1659b#rd"
+    },
+    {
+      date: "2025-12-06", type: "media", pl: "wechat", src: { zh: "可研易绘（微信公众号）", en: "Keyan Yihui (WeChat)" },
+      t: { zh: "JACS｜扬州大学裴玮/于雪克 & 华南师大周思：基于单超原子结中离域激子的全可逆光电开关", en: "JACS: fully reversible photoelectronic switching in a single superatom junction" },
+      d: { zh: "从单分子开关的器件微型化背景出发，梳理超原子构型设计与器件性能之间的关系。", en: "Frames the work within device miniaturisation and explains how superatomic configuration governs device performance." },
+      u: "http://mp.weixin.qq.com/s?__biz=Mzk0NjI1NDU1OQ==&mid=2247511056&idx=2&sn=239dc74a80fee3462b7503f2e93a2802&chksm=c21efcd522908c57ea8d6827276c1f171dcacddf99ec68a567316b20a11338c6f6ec556e5759#rd"
+    },
+    {
+      date: "2025-12-05", type: "group", pl: "wechat", src: { zh: "扬州大学物理科学与技术学院（微信公众号）", en: "School of Physical Science and Technology, YZU (WeChat)" },
+      t: { zh: "我院青年教师裴玮在《Journal of the American Chemical Society》期刊发表研究论文", en: "Paper published in the Journal of the American Chemical Society" },
+      d: { zh: "M@Au₁₂ 超原子团簇在 0.50 V 低栅压下实现全可逆光电导开关，开关比达 10⁴–10⁵；裴玮为论文第一作者。", en: "M@Au₁₂ superatomic clusters deliver fully reversible photoconductive switching at 0.50 V gate bias with an on/off ratio of 10⁴–10⁵; Wei Pei is first author." },
+      u: "http://mp.weixin.qq.com/s?__biz=MzU0MzUwNTYxOA==&mid=2247677712&idx=1&sn=ed0bcfa19b06803185e79994fefbc6cd&chksm=fa3cca289a23c1f4c97bc1f1064997f3399cdc6816bf24e5e295976f92c5050e2b98ba45479f#rd"
+    },
+    {
+      date: "2025-10-15", type: "award", pl: "", src: { zh: "课题组", en: "Group" },
+      t: { zh: "周羽、杨晶、周吉祥获 2025 年研究生国家奖学金", en: "Three group members receive the 2025 National Scholarship" },
+      d: { zh: "三位研究生同时获评 2025 年研究生国家奖学金，此前均获校级学业奖学金。", en: "Three graduate students received the 2025 National Scholarship, following earlier academic scholarships at university level." }
+    },
+    {
+      date: "2025-09-20", type: "media", pl: "wechat", src: { zh: "科匠文化（微信公众号）", en: "Kejiang Culture (WeChat)" },
+      t: { zh: "扬大-裴玮团队 AFM：异质原子掺杂原子精确的金纳米团簇高–低自旋异构体", en: "AFM: heteroatom doping induces high–low spin isomers in atomically precise Au clusters" },
+      d: { zh: "中心替位掺杂 Fe/Cr/Mn 构建 M@Au₈，高/低自旋异构由金属内核点群对称性主导；硕士研究生杨晶为第一作者。", en: "Central substitution with Fe/Cr/Mn yields M@Au₈, where high/low-spin isomers are governed by the point-group symmetry of the metal core; M.Sc. student Jing Yang is first author." },
+      u: "http://mp.weixin.qq.com/s?__biz=MzkyMjIwMTA0MA==&mid=2247532703&idx=1&sn=b6634efe50588278a4deec3f190181dd&chksm=c05b1155727eb0e7554d78023c287cd802cdf432c3c7e7a0d034b3faa2105296fa8c57aa36a0#rd"
+    },
+    {
+      date: "2024-11-15", type: "award", pl: "", src: { zh: "课题组", en: "Group" },
+      t: { zh: "本科生田佳琪获第 18 届「挑战杯」主体赛国家特等奖", en: "Undergraduate Jiaqi Tian wins national grand prize at the 18th Challenge Cup" },
+      d: { zh: "同期获本科生国家奖学金、扬州大学一等校长奖学金，推免至南京大学直接攻读博士学位。", en: "She also received the National Scholarship and the First-class Presidential Scholarship, and is now pursuing a direct Ph.D. at Nanjing University." }
+    },
+    {
+      date: "2024-06-20", type: "award", pl: "", src: { zh: "扬州大学", en: "Yangzhou University" },
+      t: { zh: "入选扬州大学「青蓝工程」优秀青年骨干教师", en: "Selected for the \"Qinglan Project\" Outstanding Young Faculty program" },
+      d: { zh: "2023 年入选扬州市「绿杨金凤」人才计划，2024 年入选校「青蓝工程」优秀青年骨干教师。", en: "Selected for the Lüyang Jinfeng Talent Program (Yangzhou, 2023) and the Qinglan Project (YZU, 2024)." }
+    }
+  ],
+
+  /* ---------------- 招生 ---------------- */
+  join: {
+    intro: {
+      zh: "课题组每年招收物理学、微电子技术与光科方向的硕士与博士研究生，也欢迎本科生提前进入实验室参与科研训练。我们不要求你入学时就掌握所有计算方法，但希望你对该领域真正好奇，并愿意把一个问题追到底。",
+      en: "We admit M.Sc. and Ph.D. students in physics, microelectronics and optical science each year, and we welcome undergraduates who wish to start research training early. You do not need to arrive with every computational method in hand — but genuine curiosity and the patience to follow a problem to the end are essential."
+    },
+    blocks: [
+      {
+        h: { zh: "招生方向", en: "What we work on" },
+        p: {
+          zh: "配体保护金属团簇的结构与电子结构、激发态动力学、功能团簇逆向设计、单团簇器件量子输运。具体课题会根据你的背景与兴趣，在组内现有项目框架下共同确定。",
+          en: "Structure and electronic structure of ligand-protected metal clusters, excited-state dynamics, inverse design of functional clusters, and quantum transport in single-cluster devices. Specific projects are defined together, within the group's ongoing programmes, according to your background and interests."
+        }
+      },
+      {
+        h: { zh: "我们期待你具备", en: "What we look for" },
+        list: [
+          { zh: "物理、材料、化学或微电子相关背景，具备固体物理与量子力学基础", en: "A background in physics, materials, chemistry or microelectronics, with foundations in solid-state physics and quantum mechanics" },
+          { zh: "愿意学习编程与计算工具（Python / Fortran / VASP / Gaussian 等），有 Linux 使用经验更佳", en: "Willingness to learn programming and computational tools (Python, Fortran, VASP, Gaussian); Linux experience is a plus" },
+          { zh: "能阅读英文文献，并有把结果写清楚的意愿", en: "Ability to read English literature and a willingness to write results up clearly" },
+          { zh: "主动、诚实、能与人合作——这三点比已有技能更重要", en: "Initiative, honesty and the ability to collaborate — these matter more than existing skills" }
+        ]
+      },
+      {
+        h: { zh: "你在这里能得到", en: "What we offer" },
+        list: [
+          { zh: "充足的计算资源：国家超级计算天津中心及校内外集群机时", en: "Generous computing resources, including allocations at the National Supercomputer Center in Tianjin and local clusters" },
+          { zh: "从选题到论文写作的完整训练，组内每周个别讨论", en: "End-to-end training from problem selection to paper writing, with weekly individual discussions" },
+          { zh: "与大连理工大学、华南师范大学等单位的常态化合作与交流机会", en: "Regular collaboration and exchange with groups at Dalian University of Technology, South China Normal University and elsewhere" },
+          { zh: "按学校规定发放的奖助学金，以及成果发表后的组内奖励", en: "University scholarships and stipends, plus group-level awards for publications" }
+        ]
+      },
+      {
+        h: { zh: "如何申请", en: "How to apply" },
+        p: {
+          zh: "请将个人简历、成绩单（附排名）、简要的研究兴趣说明（不超过一页）合并为一个 PDF，发送至 pwei@yzu.edu.cn，邮件标题注明「研究生申请-姓名-学校」。我们会在两周内回复；若方向匹配，会安排一次线上交流。",
+          en: "Send a single PDF containing your CV, transcript (with ranking) and a one-page statement of research interests to pwei@yzu.edu.cn, with the subject line \"Graduate application – Name – University\". We reply within two weeks, and arrange an online meeting when there is a good fit."
+        }
+      }
+    ],
+    aside: [
+      { k: { zh: "招生专业", en: "Programs" }, v: { zh: "物理学、微电子技术、光科等硕士（学硕 + 专硕）", en: "M.Sc. in physics, microelectronics, optical science (academic and professional)" } },
+      { k: { zh: "博士招生", en: "Ph.D." }, v: { zh: "凝聚态物理方向，2027 年起可招收博士生", en: "Condensed matter physics, from 2027" } },
+      { k: { zh: "本科生", en: "Undergraduates" }, v: { zh: "常年接收科研训练与毕业论文，建议大二下学期起联系", en: "Research training and theses year-round; contact from the second year" } },
+      { k: { zh: "博士后", en: "Postdocs" }, v: { zh: "欢迎计算材料学 / 凝聚态物理背景的博士联系", en: "Ph.D. holders in computational materials or condensed matter are welcome to get in touch" } }
+    ]
+  }
+};
+
+</script>
+<script>
+/* ==========================================================================
+   app.js — 视图路由、双语文案渲染、交互与可视化
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var D = window.LAB;
+  var VIEWS = ['home', 'team', 'research', 'publications', 'news', 'join', 'contact'];
+
+  /* ---------------- 界面文案（内容文案在 data.js） ---------------- */
+  var I18N = {
+    zh: {
+      'brand': '裴玮课题组',
+      'brandSub': '团簇物理与计算材料 · 扬州大学',
+      'nav.home': '首页', 'nav.team': '成员介绍', 'nav.research': '研究方向',
+      'nav.pubs': '科研成果', 'nav.news': '新闻动态', 'nav.join': '招生招聘', 'nav.contact': '联系方式',
+
+      'hero.kicker': '团簇物理 · 计算材料学',
+      'hero.lead': '我们关心原子精确的金属团簇：它的超原子壳层如何形成，激发态能量如何在飞秒尺度耗散，以及把单个团簇接入电极后，能做出什么样的器件。',
+      'hero.cta1': '研究方向', 'hero.cta2': '招生信息',
+      'hero.f1': '研究领域', 'hero.f1v': '团簇物理 · 计算材料',
+      'hero.f2': '在招学生', 'hero.f2v': '硕士 / 博士',
+      'hero.f3': '办公室', 'hero.f3v': '物理楼 318 室',
+
+      'sec.focus.k': 'Research focus', 'sec.focus.t': '四个方向，一条主线',
+      'sec.focus.l': '结构决定电子结构，电子结构决定激发态，激发态最终决定器件功能。四个方向并非并列，而是同一条链条上的四段。',
+      'sec.pubs.k': 'Selected work', 'sec.pubs.t': '近期代表性论文',
+      'sec.pubs.l': '完整列表收录 2018 年以来 64 篇论文，可按年份、作者角色与关键词检索。',
+      'sec.news.k': 'Latest', 'sec.news.t': '课题组动态',
+      'sec.news.l': '论文发表、学术交流与成员获奖，同时汇集全网及微信公众号的相关报道。',
+      'more': '查看全部', 'view.all': '进入完整列表',
+
+      'team.k': 'People', 'team.t': '课题组成员',
+      'team.l': '一个不大的组：讨论充分，动手要快，写东西要清楚。',
+      'team.pi': '课题组负责人',
+      'team.note': '成员名单、荣誉与去向依据学院公开获奖记录整理（2023–2025）。在读状态与最新成员信息，请以课题组公告为准。',
+      'team.people': '人',
+
+      'research.k': 'Research', 'research.t': '研究方向',
+      'research.l': '我们不做孤立的计算：每一个体系都对应一个可以被实验检验的物理问题。',
+      'research.pipeline': '研究链条',
+      'research.methods': '方法与体系',
+      'research.intro': '课题组以配体保护的原子精确金属团簇为核心体系。这类团簇兼具分子的确定性与固体的大面积电子态，是研究量子尺寸效应如何逐步过渡到块体行为的理想模型，也是构筑单分子器件的天然基元。',
+
+      'pubs.k': 'Publications', 'pubs.t': '科研成果',
+      'pubs.l': '论文、项目与学术服务。论文列表标注第一作者、通讯作者与本科生一作工作。',
+      'pubs.tab1': '论文', 'pubs.tab2': '科研项目', 'pubs.tab3': '荣誉与服务',
+      'pubs.search': '检索作者、期刊或年份',
+      'pubs.all': '全部', 'pubs.first': '第一作者', 'pubs.corr': '通讯作者', 'pubs.coop': '合作',
+      'pubs.count': '篇', 'pubs.unit': '项',
+      'pubs.empty': '没有匹配的条目，请调整筛选条件。',
+      'pubs.honors': '荣誉与人才计划', 'pubs.service': '学术服务', 'pubs.review': '担任审稿人',
+      'pubs.role': '主持',
+
+      'news.k': 'News', 'news.t': '新闻动态',
+      'news.l': '课题组进展、媒体报道与学术活动。报道来源覆盖学院与学校公众号、学术类微信公众号及高校新闻网。',
+      'news.all': '全部', 'news.group': '课题组', 'news.media': '媒体报道',
+      'news.talk': '学术交流', 'news.award': '荣誉奖励',
+      'news.updated': '自动聚合 · 更新于',
+      'news.aggTitle': '关于本栏目的信息来源',
+      'news.aggDesc': '本栏目由聚合脚本按固定关键词（课题组负责人姓名、单位、团簇与超原子相关主题）定期检索全网新闻与微信公众号文章，去重后按时间排序写入 data/news.json；页面加载时优先读取该文件，读取失败则回退到内置数据。外部报道的标题与观点归原发布方所有。',
+      'news.aggRun': '运行 fetch_news.py 可手动刷新',
+      'news.empty': '当前筛选下暂无条目。',
+
+      'join.k': 'Join us', 'join.t': '招生招聘',
+      'join.l': '我们更看重好奇心与耐心，而不是你已经会用什么软件。',
+      'join.aside': '招生概览', 'join.cta': '发送申请邮件',
+
+      'contact.k': 'Contact', 'contact.t': '联系方式',
+      'contact.l': '欢迎讨论合作、来访交流，或仅仅来问一个问题。',
+      'contact.email': '电子邮箱', 'contact.office': '办公地点', 'contact.address': '通信地址',
+      'contact.tel': '学院电话', 'contact.post': '邮编', 'contact.links': '学术档案',
+      'contact.mapTitle': '位置', 'contact.mapNote': '示意图，非实际比例。来访请提前邮件约定时间。',
+
+      'footer.about': '扬州大学物理科学与技术学院裴玮课题组，研究团簇物理与计算材料学。',
+      'footer.nav': '导航', 'footer.contact': '联系',
+      'footer.rights': '© 2026 裴玮课题组 · 扬州大学物理科学与技术学院',
+      'footer.note': '本站内容依据公开信息整理，如有疏漏请联系更正。',
+      'footer.updated': '最后更新'
+    },
+    en: {
+      'brand': 'Pei Lab',
+      'brandSub': 'Cluster Physics & Computational Materials · Yangzhou University',
+      'nav.home': 'Home', 'nav.team': 'People', 'nav.research': 'Research',
+      'nav.pubs': 'Publications', 'nav.news': 'News', 'nav.join': 'Join us', 'nav.contact': 'Contact',
+
+      'hero.kicker': 'Cluster physics · Computational materials',
+      'hero.lead': 'We study atomically precise metal clusters: how their superatomic shells form, how excited-state energy dissipates on a femtosecond timescale, and what kind of device a single cluster becomes once it is wired between two electrodes.',
+      'hero.cta1': 'Research', 'hero.cta2': 'Open positions',
+      'hero.f1': 'Fields', 'hero.f1v': 'Clusters · Computation',
+      'hero.f2': 'Recruiting', 'hero.f2v': 'M.Sc. / Ph.D.',
+      'hero.f3': 'Office', 'hero.f3v': 'Room 318, Physics Building',
+
+      'sec.focus.k': 'Research focus', 'sec.focus.t': 'Four directions, one thread',
+      'sec.focus.l': 'Structure sets the electronic structure, the electronic structure sets the excited state, and the excited state ultimately sets device function. The four directions are four segments of a single chain.',
+      'sec.pubs.k': 'Selected work', 'sec.pubs.t': 'Recent representative papers',
+      'sec.pubs.l': 'The full list covers 64 papers since 2018, searchable by year, author role and keyword.',
+      'sec.news.k': 'Latest', 'sec.news.t': 'Group news',
+      'sec.news.l': 'Publications, seminars and student awards, together with coverage from the web and WeChat academic accounts.',
+      'more': 'View all', 'view.all': 'Open full list',
+
+      'team.k': 'People', 'team.t': 'Group members',
+      'team.l': 'A small group: discuss thoroughly, build quickly, write clearly.',
+      'team.pi': 'Principal investigator',
+      'team.note': 'Names, awards and destinations are compiled from publicly available school records (2023–2025). For current membership, please refer to the group\u2019s latest announcements.',
+      'team.people': 'people',
+
+      'research.k': 'Research', 'research.t': 'Research directions',
+      'research.l': 'We do not run calculations in isolation: every system corresponds to a physical question that experiments can test.',
+      'research.pipeline': 'Research pipeline',
+      'research.methods': 'Methods & systems',
+      'research.intro': 'The group centres on ligand-protected, atomically precise metal clusters. These clusters combine molecular determinacy with bulk-like delocalised electronic states, making them ideal models for how quantum size effects give way to bulk behaviour — and natural building blocks for single-molecule devices.',
+
+      'pubs.k': 'Publications', 'pubs.t': 'Research output',
+      'pubs.l': 'Papers, projects and academic service. Author roles are marked for first-author, corresponding-author and undergraduate-led work.',
+      'pubs.tab1': 'Papers', 'pubs.tab2': 'Projects', 'pubs.tab3': 'Honours & service',
+      'pubs.search': 'Search authors, journal or year',
+      'pubs.all': 'All', 'pubs.first': 'First author', 'pubs.corr': 'Corresponding', 'pubs.coop': 'Co-author',
+      'pubs.count': 'papers', 'pubs.unit': 'projects',
+      'pubs.empty': 'No matching entries. Try adjusting the filters.',
+      'pubs.honors': 'Honours & talent programmes', 'pubs.service': 'Academic service', 'pubs.review': 'Reviewer for',
+      'pubs.role': 'PI',
+
+      'news.k': 'News', 'news.t': 'News & coverage',
+      'news.l': 'Group progress, media coverage and academic visits, gathered from school and university accounts, academic WeChat channels and university news pages.',
+      'news.all': 'All', 'news.group': 'Group', 'news.media': 'Media',
+      'news.talk': 'Visits', 'news.award': 'Awards',
+      'news.updated': 'Auto-aggregated · updated',
+      'news.aggTitle': 'Where this content comes from',
+      'news.aggDesc': 'A scheduled script searches the web and WeChat academic accounts using fixed keywords (PI name, affiliation, cluster and superatom topics), de-duplicates the results and writes them, in reverse chronological order, to data/news.json. The page reads that file first and falls back to embedded data if it is unavailable. Titles and views in external coverage remain those of the original publishers.',
+      'news.aggRun': 'Run fetch_news.py to refresh manually',
+      'news.empty': 'No entries under the current filter.',
+
+      'join.k': 'Join us', 'join.t': 'Open positions',
+      'join.l': 'Curiosity and patience matter more to us than the software you already know.',
+      'join.aside': 'At a glance', 'join.cta': 'Write to us',
+
+      'contact.k': 'Contact', 'contact.t': 'Contact',
+      'contact.l': 'For collaboration, a visit, or simply a question — you are welcome to write.',
+      'contact.email': 'Email', 'contact.office': 'Office', 'contact.address': 'Address',
+      'contact.tel': 'School office', 'contact.post': 'Postcode', 'contact.links': 'Profiles',
+      'contact.mapTitle': 'Location', 'contact.mapNote': 'Schematic, not to scale. Please arrange a time by email before visiting.',
+
+      'footer.about': 'Pei Group, School of Physical Science and Technology, Yangzhou University — cluster physics and computational materials science.',
+      'footer.nav': 'Sections', 'footer.contact': 'Contact',
+      'footer.rights': '© 2026 Pei Lab · School of Physical Science and Technology, Yangzhou University',
+      'footer.note': 'Compiled from publicly available information. Please write to us with any correction.',
+      'footer.updated': 'Last updated'
+    }
+  };
+
+  var state = {
+    lang: localStorage.getItem('lab-lang') === 'en' ? 'en' : 'zh',
+    view: 'home',
+    pubTab: 'papers',
+    pubFilter: 'all',
+    pubYear: 'all',
+    pubQuery: '',
+    newsFilter: 'all',
+    news: D.news.slice(),
+    newsSource: 'embedded',
+    newsUpdated: D.meta.updated,
+    clusterReady: false,
+    clusterRaf: null
+  };
+
+  /* ---------------- 工具 ---------------- */
+  function pick(o) {
+    if (o == null) return '';
+    if (typeof o === 'string') return o;
+    return o[state.lang] != null ? o[state.lang] : (o.zh || '');
+  }
+  function t(k) {
+    var d = I18N[state.lang] || I18N.zh;
+    return d[k] != null ? d[k] : (I18N.zh[k] || k);
+  }
+  function $(s, el) { return (el || document).querySelector(s); }
+  function $$(s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); }
+
+  var ARROW = '<svg class="btn__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.6 2.6 10 6l-3.4 3.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var IC_WECHAT = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.1 3C5.2 3 2 5.6 2 8.8c0 1.8 1 3.4 2.7 4.5l-.7 2.1 2.4-1.2c.8.2 1.6.4 2.4.4h.6a5.3 5.3 0 0 1-.2-1.4c0-3 2.9-5.4 6.5-5.4h.6C15.7 5 12.7 3 9.1 3Zm-2.4 3.1a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.8 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Z"/><path d="M22 13.2c0-2.6-2.6-4.7-5.8-4.7s-5.8 2.1-5.8 4.7 2.6 4.7 5.8 4.7c.7 0 1.3-.1 1.9-.3l2 1-.6-1.7c1.5-.9 2.5-2.2 2.5-3.7Zm-7.7-1.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Zm3.8 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Z"/></svg>';
+  var IC_WEB = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.6 5.4 3.6 9s-1.2 6.6-3.6 9c-2.4-2.4-3.6-5.4-3.6-9S9.6 5.4 12 3Z"/></svg>';
+
+  function secHead(kickerKey, title, lead, extra) {
+    return '<div class="sec-head">' +
+      '<div class="sec-head__main">' +
+      '<p class="kicker">' + t(kickerKey) + '</p>' +
+      '<h2>' + title + '</h2>' +
+      (lead ? '<p class="lead">' + lead + '</p>' : '') +
+      '</div>' + (extra || '') + '</div>';
+  }
+
+  /* ---------------- 首页 ---------------- */
+  function viewHome() {
+    state.clusterReady = false;
+    var p = D.profile;
+
+    var stats = D.stats.map(function (s) {
+      return '<div class="stat"><b>' + s.n + (s.suffix ? '<i>' + s.suffix + '</i>' : '') + '</b>' +
+        '<div><span>' + pick({ zh: s.zh, en: s.en }) + '</span><em>' + pick(s.note) + '</em></div></div>';
+    }).join('');
+
+    var focus = D.research.map(function (r, i) {
+      return '<article class="card card--research">' +
+        '<span class="card__no">' + r.idx + ' / ' + pick(r.sub) + '</span>' +
+        '<h3>' + pick(r.title) + '</h3>' +
+        '<p>' + pick(r.short || r.lead) + '</p>' +
+        '<div class="card__more"><a href="#/research">' + t('more') + ' ' + ARROW + '</a></div>' +
+        '</article>';
+    }).join('');
+
+    var sel = D.papers.filter(function (x) { return x.sel; });
+    var miniPubs = sel.map(function (x) {
+      return '<a class="mini-pub" href="' + (x.u || '#/publications') + '"' + (x.u ? ' target="_blank" rel="noopener"' : '') + '>' +
+        '<span class="mini-pub__j">' + x.j + '</span>' +
+        '<span><span class="mini-pub__t">' + (x.t || '') + '</span>' +
+        '<span class="mini-pub__a">' + x.a.replace(/W\. Pei/g, '<b>W. Pei</b>') + (x.d ? ' · ' + x.d : '') + '</span></span>' +
+        '<span class="mini-pub__y">' + x.y + '</span></a>';
+    }).join('');
+
+    var latest = state.news.slice(0, 3).map(function (n) {
+      return '<article class="news-item">' + newsDate(n) +
+        '<div>' + newsTitle(n) + newsDesc(n) + newsSrc(n) + '</div>' +
+        '<div class="news-item__kind">' + kindBadge(n.type) + '</div></article>';
+    }).join('');
+
+    return '<div class="hero"><div class="wrap"><div class="hero__grid">' +
+      '<div>' +
+      '<p class="kicker">' + t('hero.kicker') + '</p>' +
+      '<h1 class="hero__name">' + pick(p.name) + '<span>' + (state.lang === 'zh' ? p.nameEn : p.name.zh) + '</span></h1>' +
+      '<div class="hero__role"><b>' + pick(p.role) + '</b><span>' + pick(p.discipline) + '</span></div>' +
+      '<p class="hero__affil">' + pick(p.affil) + '</p>' +
+      '<p class="hero__lead">' + t('hero.lead') + '</p>' +
+      '<div class="hero__actions">' +
+      '<a class="btn" href="#/research">' + t('hero.cta1') + ARROW + '</a>' +
+      '<a class="btn btn--ghost" href="#/join">' + t('hero.cta2') + '</a></div>' +
+      '<dl class="hero__facts">' +
+      '<div><dt>' + t('hero.f1') + '</dt><dd>' + t('hero.f1v') + '</dd></div>' +
+      '<div><dt>' + t('hero.f2') + '</dt><dd>' + t('hero.f2v') + '</dd></div>' +
+      '<div><dt>' + t('hero.f3') + '</dt><dd>' + t('hero.f3v') + '</dd></div>' +
+      '</dl></div>' +
+      '<div class="hero__visual"><div class="cluster-box">' +
+      '<svg id="cluster" viewBox="0 0 420 420" role="img" aria-label="M@Au12 superatomic core-shell cluster model"></svg>' +
+      '<span class="cluster-cap">FIG. 1 — <i>M@Au₁₂</i> core–shell cluster</span>' +
+      '</div></div></div></div>' +
+      '<div class="statbar"><div class="wrap"><div class="statbar__grid">' + stats + '</div></div></div></div>' +
+
+      '<div class="wrap"><section class="sec">' +
+      secHead('sec.focus.k', t('sec.focus.t'), t('sec.focus.l')) +
+      '<div class="grid grid--4">' + focus + '</div></section>' +
+
+      '<section class="sec"><div class="sec-head"><div class="sec-head__main">' +
+      '<p class="kicker">' + t('sec.pubs.k') + '</p><h2>' + t('sec.pubs.t') + '</h2>' +
+      '<p class="lead">' + t('sec.pubs.l') + '</p></div>' +
+      '<a class="link-arrow" href="#/publications">' + t('view.all') + '</a></div>' +
+      '<div class="mini-pubs">' + miniPubs + '</div></section>' +
+
+      '<section class="sec"><div class="sec-head"><div class="sec-head__main">' +
+      '<p class="kicker">' + t('sec.news.k') + '</p><h2>' + t('sec.news.t') + '</h2>' +
+      '<p class="lead">' + t('sec.news.l') + '</p></div>' +
+      '<a class="link-arrow" href="#/news">' + t('more') + '</a></div>' +
+      '<div class="news-list">' + latest + '</div></section>' +
+
+      '<section class="sec sec--tight"><div class="cta-band">' +
+      '<div><p class="kicker">Join us</p><h3>' + t('join.t') + '</h3><p>' + pick(D.join.intro).slice(0, 96) + '…</p></div>' +
+      '<a class="btn" href="#/join">' + t('hero.cta2') + ARROW + '</a></div></section>' +
+      '</div>';
+  }
+
+  /* ---------------- 成员 ---------------- */
+  function viewTeam() {
+    var p = D.profile;
+    var initials = state.lang === 'zh' ? pick(p.name).charAt(0) : 'WP';
+
+    var groups = D.members.map(function (g) {
+      var people = g.people.map(function (m) {
+        var av = state.lang === 'zh' ? pick({ zh: m.zh, en: m.en }).charAt(0) : m.en.split(' ').map(function (w) { return w.charAt(0); }).join('');
+        var notes = m.notes.map(function (n) { return '<li>' + pick(n) + '</li>'; }).join('');
+        return '<article class="member">' +
+          '<div class="member__av">' + av + '</div>' +
+          '<div class="member__body"><h4>' + pick({ zh: m.zh, en: m.en }) + '</h4>' +
+          '<p class="member__role">' + pick(m.role) + '</p>' +
+          (m.to ? '<p class="member__to">→ ' + pick(m.to) + '</p>' : '') +
+          '<ul class="member__notes">' + notes + '</ul></div></article>';
+      }).join('');
+
+      var pad = (3 - (g.people.length % 3)) % 3;
+      for (var gi = 0; gi < pad; gi++) people += '<div class="member member--ghost" aria-hidden="true"></div>';
+
+      return '<div class="member-group">' +
+        '<div class="member-group__head"><h3>' + pick(g.title) + '</h3>' +
+        '<span>' + pick(g.note) + '</span><b>' + g.people.length + ' ' + t('team.people') + '</b></div>' +
+        '<div class="grid grid--3">' + people + '</div></div>';
+    }).join('');
+
+    var timeline = p.timeline.map(function (x) {
+      return '<li><span>' + x.t + '</span><div><b>' + pick({ zh: x.zh, en: x.en }) + '</b>' +
+        '<div class="small muted">' + pick(x.place) + '</div></div></li>';
+    }).join('');
+
+    return '<div class="wrap">' + secHead('team.k', t('team.t'), t('team.l')) +
+      '<div class="pi-card">' +
+      '<div class="pi-card__side"><div class="pi-avatar"><b>' + initials + '</b></div>' +
+      '<h3>' + pick(p.name) + '</h3><p>' + pick(p.role) + '</p>' +
+      '<p style="margin-top:4px">' + pick(p.group) + '</p>' +
+      '<div class="links"><a href="mailto:' + p.email + '">' + p.email + '</a>' +
+      '<a href="' + p.orcidUrl + '" target="_blank" rel="noopener">ORCID ' + p.orcid + '</a>' +
+      '<a href="' + p.rgUrl + '" target="_blank" rel="noopener">ResearchGate</a></div></div>' +
+      '<div class="pi-card__body"><p class="lead-lg">' + pick(p.intro[0]) + '</p>' +
+      '<p>' + pick(p.intro[1]) + '</p>' +
+      '<ul class="honor-list honor-list--time" style="margin-top:28px">' + timeline + '</ul></div></div>' +
+      '<div class="notice" style="margin-bottom:48px"><span>' + t('team.note') + '</span></div>' +
+      groups + '</div>';
+  }
+
+  /* ---------------- 研究方向 ---------------- */
+  function viewResearch() {
+    var pipe = D.pipeline.map(function (x, i) {
+      return '<li><i>' + String(i + 1).padStart(2, '0') + '</i><div><b>' + pick(x) + '</b><span>' + pick(x.d) + '</span></div></li>';
+    }).join('');
+
+    var dirs = D.research.map(function (r) {
+      var pts = r.points.map(function (x) { return '<li>' + pick(x) + '</li>'; }).join('');
+      var tags = r.tags.map(function (x) { return '<span class="tag">' + x + '</span>'; }).join('');
+      return '<article class="dir" id="dir-' + r.id + '">' +
+        '<div class="dir__aside"><span class="idx">' + r.idx + '</span><h3>' + pick(r.title) + '</h3>' +
+        '<p>' + pick(r.sub) + '</p></div>' +
+        '<div class="dir__body"><p>' + pick(r.lead) + '</p>' +
+        '<ul class="dir__points">' + pts + '</ul>' +
+        '<div class="tags">' + tags + '</div></div></article>';
+    }).join('');
+
+    return '<div class="wrap">' + secHead('research.k', t('research.t'), t('research.l')) +
+      '<div class="research-intro">' +
+      '<div><p class="lead-lg">' + t('research.intro') + '</p>' +
+      '<p class="small muted" style="margin-top:20px">' + t('research.methods') + '：DFT / TDDFT · AIMD · NAMD · NEGF · CASSCF · ' +
+      'VASP · Gaussian · QuantumATK</p></div>' +
+      '<aside class="pipeline"><p class="pipeline__title">' + t('research.pipeline') + '</p><ol>' + pipe + '</ol></aside>' +
+      '</div>' + dirs + '</div>';
+  }
+
+  /* ---------------- 论文 ---------------- */
+  function peiRole(a) {
+    return {
+      corr: /W\. Pei\*/.test(a),
+      cofirst: /W\. Pei\s*#/.test(a),
+      first: /^W\. Pei[#*]?,/.test(a) || /^W\. Pei[#*]?$/.test(a)
+    };
+  }
+
+  function filteredPapers() {
+    var q = state.pubQuery.trim().toLowerCase();
+    return D.papers.filter(function (x) {
+      var r = peiRole(x.a);
+      if (state.pubFilter === 'first' && !r.first) return false;
+      if (state.pubFilter === 'corr' && !r.corr) return false;
+      if (state.pubFilter === 'coop' && (r.first || r.corr || r.cofirst)) return false;
+      if (state.pubYear !== 'all' && String(x.y) !== state.pubYear) return false;
+      if (q) {
+        var hay = (x.a + ' ' + x.j + ' ' + x.y + ' ' + (x.d || '')).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function pubListHTML() {
+    var list = filteredPapers();
+    if (!list.length) return '<p class="small muted" style="padding:36px 0">' + t('pubs.empty') + '</p>';
+
+    var years = [];
+    list.forEach(function (x) { if (years.indexOf(x.y) === -1) years.push(x.y); });
+    years.sort(function (a, b) { return b - a; });
+
+    return years.map(function (y) {
+      var rows = list.filter(function (x) { return x.y === y; }).map(function (x) {
+        var r = peiRole(x.a);
+        var badges = '';
+        if (r.first) badges += '<span class="badge badge--first">' + (state.lang === 'zh' ? '第一作者' : 'First') + '</span>';
+        if (r.corr) badges += '<span class="badge badge--corr">' + (state.lang === 'zh' ? '通讯作者' : 'Corresponding') + '</span>';
+        if (r.cofirst && !r.first) badges += '<span class="badge">' + (state.lang === 'zh' ? '共同一作' : 'Co-first') + '</span>';
+        if (x.n) badges += '<span class="badge badge--ug">' + x.n + '</span>';
+        return '<article class="pub"><div>' +
+          '<p class="pub__a">' + x.a.replace(/W\. Pei/g, '<b>W. Pei</b>') + '</p>' +
+          '<p class="pub__r"><em>' + x.j + '</em>' + (x.d ? ', ' + x.d : '') +
+          (x.u ? ' · <a href="' + x.u + '" target="_blank" rel="noopener">DOI</a>' : '') + '</p>' +
+          '</div><div class="pub__badges">' + badges + '</div></article>';
+      }).join('');
+      return '<div class="yearblock"><div class="yearblock__h"><b>' + y + '</b><i></i><em>' +
+        list.filter(function (x) { return x.y === y; }).length + ' ' + t('pubs.count') + '</em></div>' + rows + '</div>';
+    }).join('');
+  }
+
+  function viewPubs() {
+    var tabs = [['papers', t('pubs.tab1')], ['projects', t('pubs.tab2')], ['honors', t('pubs.tab3')]]
+      .map(function (x) {
+        return '<button type="button" data-pubtab="' + x[0] + '"' + (state.pubTab === x[0] ? ' class="is-on"' : '') + '>' + x[1] + '</button>';
+      }).join('');
+
+    var body = '';
+    if (state.pubTab === 'papers') {
+      var counts = { all: D.papers.length, first: 0, corr: 0, coop: 0 };
+      D.papers.forEach(function (x) {
+        var r = peiRole(x.a);
+        if (r.first) counts.first++;
+        if (r.corr) counts.corr++;
+        if (!r.first && !r.corr && !r.cofirst) counts.coop++;
+      });
+      var chips = [['all', t('pubs.all')], ['first', t('pubs.first')], ['corr', t('pubs.corr')], ['coop', t('pubs.coop')]]
+        .map(function (x) {
+          return '<button type="button" class="chip' + (state.pubFilter === x[0] ? ' is-on' : '') + '" data-pubfilter="' + x[0] + '">' +
+            x[1] + ' <span style="opacity:.6">' + counts[x[0]] + '</span></button>';
+        }).join('');
+
+      var years = [];
+      D.papers.forEach(function (x) { if (years.indexOf(x.y) === -1) years.push(x.y); });
+      years.sort(function (a, b) { return b - a; });
+      var ychips = '<span class="chip-label">' + (state.lang === 'zh' ? '年份' : 'Year') + '</span>' +
+        years.map(function (y) {
+          return '<button type="button" class="chip' + (state.pubYear === String(y) ? ' is-on' : '') + '" data-pubyear="' + y + '">' + y + '</button>';
+        }).join('');
+
+      body = '<div class="chips">' + chips + '</div><div class="chips" style="padding-top:4px">' + ychips + '</div>' +
+        '<div class="pub-count" id="pubCount">' + filteredPapers().length + ' ' + t('pubs.count') + '</div>' +
+        '<div id="pubList">' + pubListHTML() + '</div>';
+    } else if (state.pubTab === 'projects') {
+      body = D.projects.map(function (x) {
+        return '<article class="proj">' +
+          '<div class="proj__k">' + pick(x.kind) + '<span>' + pick(x.role) + '</span></div>' +
+          '<div><h3>' + pick(x.title) + '</h3>' +
+          '<p class="proj__meta">' + x.period + ' · ' + t('pubs.role') + '</p></div>' +
+          '<div class="proj__side"><b>' + x.amount + '</b>' + pick(x.unit) + '</div></article>';
+      }).join('');
+    } else {
+      var honors = D.honors.map(function (x) {
+        return '<li><span>' + x.t + '</span><div>' + pick(x) + '</div></li>';
+      }).join('');
+      var roles = D.service.roles.map(function (x) { return '<li><span>—</span><div>' + pick(x) + '</div></li>'; }).join('');
+      body = '<h3 style="font-size:16px;margin:34px 0 14px">' + t('pubs.honors') + '</h3>' +
+        '<ul class="honor-list">' + honors + '</ul>' +
+        '<h3 style="font-size:16px;margin:38px 0 14px">' + t('pubs.service') + '</h3>' +
+        '<ul class="honor-list">' + roles + '</ul>' +
+        '<p class="small muted" style="margin-top:22px">' + t('pubs.review') + '：' + D.service.review + '</p>';
+    }
+
+    var toolbar = '<div class="pub-toolbar"><div class="tabs">' + tabs + '</div>' +
+      (state.pubTab === 'papers' ? '<div class="search"><input type="search" id="pubSearch" placeholder="' + t('pubs.search') + '" value="' + state.pubQuery + '"></div>' : '') +
+      '</div>';
+
+    return '<div class="wrap">' + secHead('pubs.k', t('pubs.t'), t('pubs.l')) + toolbar + body + '</div>';
+  }
+
+  /* ---------------- 新闻 ---------------- */
+  function kindBadge(type) {
+    var map = { group: ['kind--group', 'news.group'], media: ['kind--media', 'news.media'], talk: ['kind--talk', 'news.talk'], award: ['kind--award', 'news.award'] };
+    var m = map[type] || map.group;
+    return '<span class="kind ' + m[0] + '">' + t(m[1]) + '</span>';
+  }
+
+  function newsTitle(n) {
+    var inner = pick(n.t);
+    return n.u ? '<a class="news-item__t" href="' + n.u + '" target="_blank" rel="noopener">' + inner + '</a>'
+      : '<p class="news-item__t">' + inner + '</p>';
+  }
+  function newsDesc(n) { return n.d ? '<p class="news-item__d">' + pick(n.d) + '</p>' : ''; }
+  function newsSrc(n) {
+    if (!n.pl) return '';
+    var icon = n.pl === 'wechat' ? IC_WECHAT : IC_WEB;
+    return '<div class="news-item__src"><span class="src">' + icon + pick(n.src) + '</span></div>';
+  }
+  function newsDate(n) {
+    return '<div class="news-item__date"><b>' + n.date.slice(5).replace('-', '.') + '</b><span>' + n.date.slice(0, 4) + '</span></div>';
+  }
+
+  function viewNews() {
+    var filters = [['all', t('news.all')], ['group', t('news.group')], ['media', t('news.media')], ['talk', t('news.talk')], ['award', t('news.award')]]
+      .map(function (x) {
+        return '<button type="button" class="chip' + (state.newsFilter === x[0] ? ' is-on' : '') + '" data-newsfilter="' + x[0] + '">' + x[1] + '</button>';
+      }).join('');
+
+    var items = state.news.filter(function (n) { return state.newsFilter === 'all' || n.type === state.newsFilter; });
+    var list = items.length ? items.map(function (n) {
+      return '<article class="news-item">' + newsDate(n) +
+        '<div>' + newsTitle(n) + newsDesc(n) + newsSrc(n) + '</div>' +
+        '<div class="news-item__kind">' + kindBadge(n.type) + '</div></article>';
+    }).join('') : '<p class="small muted" style="padding:40px 0">' + t('news.empty') + '</p>';
+
+    return '<div class="wrap">' + secHead('news.k', t('news.t'), t('news.l')) +
+      '<div class="news-toolbar"><div class="chips" style="padding:0">' + filters + '</div>' +
+      '<div class="news-updated"><span class="dot-live"></span>' + t('news.updated') + ' ' + state.newsUpdated + '</div></div>' +
+      '<div class="news-list">' + list + '</div>' +
+      '<div class="aggregator-note"><div><h4>' + t('news.aggTitle') + '</h4><p>' + t('news.aggDesc') + '</p></div>' +
+      '<div class="small muted"><code>' + t('news.aggRun') + '</code></div></div></div>';
+  }
+
+  /* ---------------- 招生 ---------------- */
+  function viewJoin() {
+    var blocks = D.join.blocks.map(function (b) {
+      var list = b.list ? '<ul class="check">' + b.list.map(function (x) { return '<li>' + pick(x) + '</li>'; }).join('') + '</ul>' : '';
+      return '<div class="join-block"><h3><span>—</span>' + pick(b.h) + '</h3>' +
+        (b.p ? '<p>' + pick(b.p) + '</p>' : '') + list + '</div>';
+    }).join('');
+
+    var aside = D.join.aside.map(function (x) {
+      return '<div><dt>' + pick(x.k) + '</dt><dd>' + pick(x.v) + '</dd></div>';
+    }).join('');
+
+    return '<div class="wrap">' + secHead('join.k', t('join.t'), t('join.l')) +
+      '<div class="join-grid"><div>' +
+      '<p class="lead-lg">' + pick(D.join.intro) + '</p>' + blocks + '</div>' +
+      '<aside class="join-aside"><h3>' + t('join.aside') + '</h3><dl>' + aside + '</dl>' +
+      '<a class="btn" href="mailto:' + D.profile.email + '?subject=' + encodeURIComponent('研究生申请 / Graduate application') + '">' +
+      t('join.cta') + ARROW + '</a></aside></div></div>';
+  }
+
+  /* ---------------- 联系 ---------------- */
+  function viewContact() {
+    var p = D.profile;
+    var cells =
+      '<div class="contact-cell"><dt>' + t('contact.email') + '</dt><dd><a href="mailto:' + p.email + '">' + p.email + '</a></dd>' +
+      '<p>' + t('contact.links') + '：<a href="' + p.orcidUrl + '" target="_blank" rel="noopener">ORCID</a> · <a href="' + p.rgUrl + '" target="_blank" rel="noopener">ResearchGate</a></p></div>' +
+      '<div class="contact-cell"><dt>' + t('contact.office') + '</dt><dd>' + pick(p.office) + '</dd>' +
+      '<p>' + pick(p.affil) + '</p></div>' +
+      '<div class="contact-cell"><dt>' + t('contact.address') + '</dt><dd>' + pick(p.address) + '</dd>' +
+      '<p>' + t('contact.post') + ' ' + p.postcode + ' · ' + t('contact.tel') + ' ' + p.tel + '</p></div>';
+
+    var map = '<svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+      '<rect width="600" height="300" fill="#f4f1ea"/>' +
+      '<g fill="#ece6d9">' +
+      '<rect x="18" y="18" width="86" height="58"/><rect x="134" y="18" width="176" height="58"/><rect x="352" y="18" width="86" height="58"/><rect x="470" y="18" width="112" height="58"/>' +
+      '<rect x="18" y="112" width="86" height="82"/><rect x="134" y="112" width="176" height="82"/><rect x="470" y="112" width="112" height="82"/>' +
+      '<rect x="18" y="226" width="86" height="56"/><rect x="134" y="226" width="176" height="56"/><rect x="352" y="226" width="86" height="56"/><rect x="470" y="226" width="112" height="56"/>' +
+      '</g>' +
+      '<g stroke="#dfd8c8" stroke-width="10">' +
+      '<path d="M-10 90h620"/><path d="M-10 206h620"/><path d="M118 -10v320"/><path d="M326 -10v320"/><path d="M454 -10v320"/>' +
+      '</g>' +
+      '<g stroke="#e8e2d5" stroke-width="2">' +
+      '<path d="M0 48h600"/><path d="M0 152h600"/><path d="M0 258h600"/><path d="M60 0v300"/><path d="M222 0v300"/><path d="M390 0v300"/><path d="M540 0v300"/>' +
+      '</g>' +
+      '<rect x="340" y="98" width="138" height="92" fill="#e3dccb" stroke="#c7bda7"/>' +
+      '<circle cx="409" cy="144" r="30" fill="rgba(23,51,79,.09)"/>' +
+      '<circle cx="409" cy="144" r="7.5" fill="#17334f"/>' +
+      '<circle cx="409" cy="144" r="2.6" fill="#fdfaf3"/>' +
+      '<text x="409" y="216" text-anchor="middle" font-family="Consolas, monospace" font-size="10" fill="#8b8474">物理科学与技术学院 · 318</text>' +
+      '<g stroke="#b8b0a0" stroke-width="1"><path d="M36 272h58M36 268v8M94 268v8"/></g>' +
+      '<text x="36" y="264" font-family="Consolas, monospace" font-size="8.5" fill="#a49c8b">100 m</text>' +
+      '<g transform="translate(556,40)"><path d="M0 -15 6.5 8 0 2.5 -6.5 8Z" fill="#b8b0a0"/>' +
+      '<text x="0" y="22" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#a49c8b">N</text></g>' +
+      '</svg>';
+
+    return '<div class="wrap">' + secHead('contact.k', t('contact.t'), t('contact.l')) +
+      '<div class="contact-grid">' + cells + '</div>' +
+      '<div class="map-card"><div class="map-canvas">' + map + '</div>' +
+      '<div class="map-info"><h3>' + t('contact.mapTitle') + '</h3>' +
+      '<p>' + pick(p.affil) + '<br>' + pick(p.office) + '</p>' +
+      '<dl class="kv"><div><dt>ADDR</dt><dd>' + pick(p.address) + '</dd></div>' +
+      '<div><dt>POST</dt><dd>' + p.postcode + '</dd></div>' +
+      '<div><dt>TEL</dt><dd>' + p.tel + '</dd></div>' +
+      '<div><dt>MAIL</dt><dd><a href="mailto:' + p.email + '">' + p.email + '</a></dd></div></dl>' +
+      '<p class="small muted" style="margin-top:16px">' + t('contact.mapNote') + '</p></div></div></div>';
+  }
+
+  /* ---------------- 页脚 ---------------- */
+  function renderFooter() {
+    var p = D.profile;
+    var nav = VIEWS.map(function (v) {
+      var key = { home: 'nav.home', team: 'nav.team', research: 'nav.research', publications: 'nav.pubs', news: 'nav.news', join: 'nav.join', contact: 'nav.contact' }[v];
+      return '<li><a href="#/' + v + '">' + t(key) + '</a></li>';
+    }).join('');
+
+    $('#footer').innerHTML = '<div class="wrap"><div class="footer__grid">' +
+      '<div><div class="footer__brand"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none">' +
+      '<circle cx="18" cy="18" r="4.2" fill="currentColor"/>' +
+      '<circle cx="18" cy="6.6" r="2.2" fill="currentColor" opacity=".5"/><circle cx="27.9" cy="12.3" r="2.2" fill="currentColor" opacity=".5"/>' +
+      '<circle cx="27.9" cy="23.7" r="2.2" fill="currentColor" opacity=".5"/><circle cx="18" cy="29.4" r="2.2" fill="currentColor" opacity=".5"/>' +
+      '<circle cx="8.1" cy="23.7" r="2.2" fill="currentColor" opacity=".5"/><circle cx="8.1" cy="12.3" r="2.2" fill="currentColor" opacity=".5"/>' +
+      '<path d="M18 6.6 27.9 12.3 27.9 23.7 18 29.4 8.1 23.7 8.1 12.3Z" stroke="currentColor" stroke-width=".9" opacity=".4"/></svg></span>' +
+      '<strong>' + t('brand') + '</strong></div><p>' + t('footer.about') + '</p></div>' +
+      '<div><h4>' + t('footer.nav') + '</h4><ul>' + nav + '</ul></div>' +
+      '<div><h4>' + t('footer.contact') + '</h4><ul>' +
+      '<li><a href="mailto:' + p.email + '">' + p.email + '</a></li>' +
+      '<li>' + pick(p.office) + '</li><li>' + pick({ zh: '江苏 · 扬州', en: 'Yangzhou, Jiangsu, China' }) + '</li>' +
+      '<li><a href="' + p.orcidUrl + '" target="_blank" rel="noopener">ORCID</a></li></ul></div></div>' +
+      '<div class="footer__bottom"><span>' + t('footer.rights') + '</span>' +
+      '<span>' + t('footer.updated') + ' ' + D.meta.updated + ' · ' + t('footer.note') + '</span></div></div>';
+  }
+
+  /* ---------------- 集群可视化 ---------------- */
+  function initCluster() {
+    var svg = document.getElementById('cluster');
+    if (!svg || state.clusterReady) return;
+    state.clusterReady = true;
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var phi = (1 + Math.sqrt(5)) / 2;
+    var raw = [[0, 1, phi], [0, 1, -phi], [0, -1, phi], [0, -1, -phi], [1, phi, 0], [1, -phi, 0],
+      [-1, phi, 0], [-1, -phi, 0], [phi, 0, 1], [-phi, 0, 1], [phi, 0, -1], [-phi, 0, -1]];
+    var V = raw.map(function (v) {
+      var n = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+      return [v[0] / n, v[1] / n, v[2] / n];
+    });
+    var E = [];
+    for (var i = 0; i < 12; i++) {
+      for (var j = i + 1; j < 12; j++) {
+        var dx = V[i][0] - V[j][0], dy = V[i][1] - V[j][1], dz = V[i][2] - V[j][2];
+        if (Math.sqrt(dx * dx + dy * dy + dz * dz) < 1.3) E.push([i, j]);
+      }
+    }
+
+    var gEdge = document.createElementNS(NS, 'g');
+    var gLig = document.createElementNS(NS, 'g');
+    var gAtom = document.createElementNS(NS, 'g');
+    var gCore = document.createElementNS(NS, 'g');
+    svg.appendChild(gEdge); svg.appendChild(gLig); svg.appendChild(gAtom); svg.appendChild(gCore);
+
+    var lines = E.map(function () {
+      var l = document.createElementNS(NS, 'line');
+      l.setAttribute('stroke', '#cbc2ae');
+      l.setAttribute('stroke-width', '1');
+      l.setAttribute('x1', 210); l.setAttribute('y1', 208);
+      l.setAttribute('x2', 210); l.setAttribute('y2', 208);
+      gEdge.appendChild(l); return l;
+    });
+    var stubs = V.map(function () {
+      var l = document.createElementNS(NS, 'line');
+      l.setAttribute('stroke', '#ddd5c5');
+      l.setAttribute('stroke-width', '0.8');
+      l.setAttribute('x1', 210); l.setAttribute('y1', 208);
+      l.setAttribute('x2', 210); l.setAttribute('y2', 208);
+      gLig.appendChild(l);
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('r', '2.4');
+      c.setAttribute('cx', 210); c.setAttribute('cy', 208);
+      c.setAttribute('fill', '#dccfb7');
+      gLig.appendChild(c);
+      return { l: l, c: c };
+    });
+    var dots = V.map(function (_, k) {
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', 210); c.setAttribute('cy', 208); c.setAttribute('r', '5');
+      c.setAttribute('fill', k % 3 === 0 ? '#b07c33' : (k % 3 === 1 ? '#c9a068' : '#a06f2e'));
+      gAtom.appendChild(c); return c;
+    });
+    var halo = document.createElementNS(NS, 'circle');
+    halo.setAttribute('cx', 210); halo.setAttribute('cy', 208);
+    halo.setAttribute('r', '26'); halo.setAttribute('fill', 'rgba(122,79,34,.12)');
+    var core = document.createElementNS(NS, 'circle');
+    core.setAttribute('cx', 210); core.setAttribute('cy', 208);
+    core.setAttribute('r', '14'); core.setAttribute('fill', '#6d4420');
+    var coreLabel = document.createElementNS(NS, 'text');
+    coreLabel.setAttribute('x', 210); coreLabel.setAttribute('y', 208);
+    coreLabel.setAttribute('text-anchor', 'middle');
+    coreLabel.setAttribute('dominant-baseline', 'central');
+    coreLabel.setAttribute('font-family', 'Georgia, serif');
+    coreLabel.setAttribute('font-size', '12');
+    coreLabel.setAttribute('fill', '#fdf8ef');
+    coreLabel.textContent = 'M';
+    gCore.appendChild(halo); gCore.appendChild(core); gCore.appendChild(coreLabel);
+
+    var cx = 210, cy = 208, R = 108, ax = -0.42, ay = 0.35;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function frame() {
+      if (state.view !== 'home') { state.clusterRaf = null; return; }
+      ay += reduce ? 0 : 0.0032;
+      ax = -0.42 + Math.sin(ay * 0.6) * 0.06;
+
+      var ca = Math.cos(ay), sa = Math.sin(ay), cb = Math.cos(ax), sb = Math.sin(ax);
+      var proj = V.map(function (v) {
+        var x1 = v[0] * ca + v[2] * sa;
+        var z1 = -v[0] * sa + v[2] * ca;
+        var y1 = v[1] * cb - z1 * sb;
+        var z2 = v[1] * sb + z1 * cb;
+        var s = 1 / (1 - z2 * 0.16);
+        return { x: cx + x1 * R * s, y: cy + y1 * R * s, z: z2, s: s };
+      });
+
+      E.forEach(function (e, k) {
+        var a = proj[e[0]], b = proj[e[1]];
+        lines[k].setAttribute('x1', a.x.toFixed(1)); lines[k].setAttribute('y1', a.y.toFixed(1));
+        lines[k].setAttribute('x2', b.x.toFixed(1)); lines[k].setAttribute('y2', b.y.toFixed(1));
+        lines[k].setAttribute('opacity', (0.34 + (a.z + b.z + 2) / 4 * 0.52).toFixed(2));
+      });
+      proj.forEach(function (p, k) {
+        var v = V[k];
+        var ox = cx + (p.x - cx) * 1.34, oy = cy + (p.y - cy) * 1.34;
+        stubs[k].l.setAttribute('x1', p.x.toFixed(1)); stubs[k].l.setAttribute('y1', p.y.toFixed(1));
+        stubs[k].l.setAttribute('x2', ox.toFixed(1)); stubs[k].l.setAttribute('y2', oy.toFixed(1));
+        stubs[k].l.setAttribute('opacity', (0.25 + (p.z + 1) / 2 * 0.5).toFixed(2));
+        stubs[k].c.setAttribute('cx', ox.toFixed(1)); stubs[k].c.setAttribute('cy', oy.toFixed(1));
+        stubs[k].c.setAttribute('opacity', (0.3 + (p.z + 1) / 2 * 0.55).toFixed(2));
+        dots[k].setAttribute('cx', p.x.toFixed(1));
+        dots[k].setAttribute('cy', p.y.toFixed(1));
+        dots[k].setAttribute('r', (4.4 + (p.z + 1) * 1.8).toFixed(2));
+        dots[k].setAttribute('opacity', (0.55 + (p.z + 1) / 2 * 0.45).toFixed(2));
+      });
+
+      state.clusterRaf = requestAnimationFrame(frame);
+    }
+    if (state.clusterRaf) cancelAnimationFrame(state.clusterRaf);
+    state.clusterRaf = requestAnimationFrame(frame);
+  }
+
+  /* ---------------- 路由 ---------------- */
+  var RENDER = {
+    home: viewHome, team: viewTeam, research: viewResearch,
+    publications: viewPubs, news: viewNews, join: viewJoin, contact: viewContact
+  };
+  var TITLES = {
+    home: { zh: '裴玮课题组 · 团簇物理与计算材料 | 扬州大学', en: 'Pei Lab · Cluster Physics & Computational Materials | Yangzhou University' },
+    team: { zh: '成员介绍 · 裴玮课题组', en: 'People · Pei Lab' },
+    research: { zh: '研究方向 · 裴玮课题组', en: 'Research · Pei Lab' },
+    publications: { zh: '科研成果 · 裴玮课题组', en: 'Publications · Pei Lab' },
+    news: { zh: '新闻动态 · 裴玮课题组', en: 'News · Pei Lab' },
+    join: { zh: '招生招聘 · 裴玮课题组', en: 'Join us · Pei Lab' },
+    contact: { zh: '联系方式 · 裴玮课题组', en: 'Contact · Pei Lab' }
+  };
+
+  function parseHash() {
+    var h = (location.hash || '').replace(/^#\/?/, '').replace(/\/$/, '');
+    return VIEWS.indexOf(h) > -1 ? h : 'home';
+  }
+
+  function renderView(view, animate) {
+    VIEWS.forEach(function (v) {
+      var el = document.getElementById('view-' + v);
+      if (!el) return;
+      if (v === view) {
+        el.innerHTML = RENDER[v]();
+        el.classList.add('is-active');
+      } else {
+        el.classList.remove('is-active');
+        el.innerHTML = '';
+      }
+    });
+    $$('.nav a').forEach(function (a) {
+      a.classList.toggle('is-on', a.getAttribute('data-nav') === (view === 'publications' ? 'pubs' : view));
+    });
+    document.title = pick(TITLES[view]);
+    document.documentElement.lang = state.lang === 'zh' ? 'zh-CN' : 'en';
+    if (view === 'home') initCluster();
+    if (view === 'publications') bindPubSearch();
+  }
+
+  function bindPubSearch() {
+    var input = document.getElementById('pubSearch');
+    if (!input) return;
+    input.addEventListener('input', function () {
+      state.pubQuery = input.value;
+      var list = document.getElementById('pubList');
+      var count = document.getElementById('pubCount');
+      if (list) list.innerHTML = pubListHTML();
+      if (count) count.textContent = filteredPapers().length + ' ' + t('pubs.count');
+    });
+  }
+
+  function go(view, push) {
+    if (VIEWS.indexOf(view) === -1) view = 'home';
+    state.view = view;
+    if (push !== false && location.hash !== '#/' + view) {
+      history.pushState(null, '', '#/' + view);
+    }
+    renderView(view, true);
+    closeNav();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  /* ---------------- 导航 & 语言 ---------------- */
+  function closeNav() {
+    var nav = $('#nav'), burger = $('#burger');
+    if (nav) nav.classList.remove('is-open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+  }
+
+  function bindNav() {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href^="#/"]') : null;
+      if (a) {
+        e.preventDefault();
+        go(a.getAttribute('href').replace(/^#\//, ''));
+        return;
+      }
+      var tab = e.target.closest ? e.target.closest('[data-pubtab]') : null;
+      if (tab) { state.pubTab = tab.getAttribute('data-pubtab'); renderView('publications'); return; }
+      var pf = e.target.closest ? e.target.closest('[data-pubfilter]') : null;
+      if (pf) { state.pubFilter = pf.getAttribute('data-pubfilter'); renderView('publications'); return; }
+      var py = e.target.closest ? e.target.closest('[data-pubyear]') : null;
+      if (py) {
+        var yv = py.getAttribute('data-pubyear');
+        state.pubYear = (state.pubYear === yv) ? 'all' : yv;
+        renderView('publications'); return;
+      }
+      var nf = e.target.closest ? e.target.closest('[data-newsfilter]') : null;
+      if (nf) { state.newsFilter = nf.getAttribute('data-newsfilter'); renderView('news'); return; }
+      var lb = e.target.closest ? e.target.closest('[data-lang]') : null;
+      if (lb) { setLang(lb.getAttribute('data-lang')); return; }
+    });
+
+    var burger = $('#burger');
+    if (burger) {
+      burger.addEventListener('click', function () {
+        var nav = $('#nav');
+        var open = nav.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    window.addEventListener('popstate', function () { go(parseHash(), false); });
+    window.addEventListener('hashchange', function () {
+      var v = parseHash();
+      if (v !== state.view) go(v, false);
+    });
+  }
+
+  function applyChrome() {
+    document.documentElement.lang = state.lang === 'zh' ? 'zh-CN' : 'en';
+    $$('[data-i18n]').forEach(function (el) {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+    $$('[data-lang]').forEach(function (b) {
+      b.classList.toggle('is-on', b.getAttribute('data-lang') === state.lang);
+    });
+  }
+
+  function setLang(lang) {
+    if (lang !== 'zh' && lang !== 'en') return;
+    if (state.lang === lang) return;
+    state.lang = lang;
+    localStorage.setItem('lab-lang', lang);
+    applyChrome();
+    renderFooter();
+    renderView(state.view);
+  }
+
+  /* ---------------- 新闻聚合数据 ---------------- */
+  function mergeLive(items) {
+    var seen = {};
+    var all = [];
+    items.concat(state.news).forEach(function (n) {
+      if (!n || !n.date) return;
+      var k = pick(n.t).replace(/\s+/g, '').slice(0, 26);
+      if (seen[k]) return;
+      seen[k] = 1;
+      all.push(n);
+    });
+    all.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    return all;
+  }
+
+  function loadNews() {
+    // 单文件版（dist/）会把 news.json 直接内联，省掉一次请求，也不受 file:// 限制
+    var inline = window.__NEWS_DATA__;
+    if (inline && Array.isArray(inline.items) && inline.items.length) {
+      state.news = mergeLive(inline.items);
+      state.newsUpdated = inline.updated || D.meta.updated;
+      state.newsSource = 'live';
+      // boot 时本函数在首屏渲染之后才执行，需按当前栏目重绘一次
+      if (state.view === 'home' || state.view === 'news') renderView(state.view);
+      return;
+    }
+    if (!window.fetch || location.protocol === 'file:') return;
+    fetch('data/news.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !Array.isArray(j.items) || !j.items.length) return;
+        state.news = mergeLive(j.items);
+        state.newsUpdated = j.updated || D.meta.updated;
+        state.newsSource = 'live';
+        if (state.view === 'home' || state.view === 'news') renderView(state.view);
+      })
+      .catch(function () { /* 保留内置数据 */ });
+  }
+
+  /* ---------------- 嵌入模式 ---------------- */
+  // 被 iframe 内嵌时（?embed=1）：去掉品牌署名与页脚，只留栏目导航，
+  // 并把文档高度通过 postMessage 告诉宿主页面，以便自动撑开 iframe。
+  function setupEmbed() {
+    document.documentElement.classList.add('is-embed');
+    var last = -1;
+    function send() {
+      var h = Math.ceil(Math.max(
+        document.documentElement.scrollHeight,
+        document.body.getBoundingClientRect().height));
+      if (Math.abs(h - last) < 2) return;
+      last = h;
+      try { parent.postMessage({ type: 'pei-lab:height', height: h }, '*'); } catch (e) { /* 非嵌入环境 */ }
+    }
+    if (window.ResizeObserver) {
+      new ResizeObserver(send).observe(document.body);
+    }
+    window.addEventListener('load', send);
+    window.addEventListener('resize', send);
+    window.addEventListener('hashchange', function () { setTimeout(send, 60); });
+    [200, 700, 1500, 2600].forEach(function (t) { setTimeout(send, t); });
+  }
+
+  /* ---------------- 启动 ---------------- */
+  function boot() {
+    var q = (location.search.match(/[?&]lang=(zh|en)/) || [])[1];
+    if (q) state.lang = q;
+    applyChrome();
+    renderFooter();
+    state.view = parseHash();
+    renderView(state.view);
+    bindNav();
+    loadNews();
+    if (/[?&]embed=1/.test(location.search)) setupEmbed();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+</script>
+</body>
+</html>
