@@ -145,8 +145,12 @@ window.LAB = {
   papers: [
     /* 2026 */
     { y: 2026, a: "Y. Song, Y. Zhou, X. Yu*, S. Zhou*, W. Pei*, J. Zhao", j: "Inorg. Chem.", d: "DOI: 10.1021/acs.inorgchem.6c02063", n: "本科生一作" },
+    { y: 2026, a: "X. Yu, Q. Gao, Y. Chen, W. Pei*, X. Zhang, Y. Su, J. Zhao", j: "J. Phys. Chem. Lett.", d: "17, 12118–12124", u: "https://doi.org/10.1021/acs.jpclett.6c02587", sel: true, t: "Ultrafast Core–Shell Spin Transfer and Spin-Selective Relaxation in an Endohedral Cage Cluster" },
+    { y: 2026, a: "Z. Wang, Z. Huang, W. Pei*, F. Zhao*, T. Liu*", j: "Laser Photonics Rev.", d: "e71759", u: "https://doi.org/10.1002/lpor.71759", sel: true, t: "Emergent Self-Trapped Excitonic Behavior Arising From the Interplay of Size, Solvent, and Dopants in Black Phosphorus Quantum Dots" },
     { y: 2026, a: "X. Yu*, Q. Gao, B. Li, W. Pei*, X. Zhang, Y. Su, J. Zhao", j: "J. Phys. Chem. Lett.", d: "17, 7094" },
-    { y: 2026, a: "T. Du, W. Pei*, P. Han, X. Yang, J. Zhao*, S. Zhou*", j: "Mater. Futures", d: "DOI: 10.1088/2752-5724/ae828c", u: "http://iopscience.iop.org/article/10.1088/2752-5724/ae828c" },
+    { y: 2026, a: "H. Che, Y. Chen, W. Pei, X. Zhang, X. Yu*, Y. Su, J. Zhao", j: "J. Phys. Chem. Lett.", d: "17, 10456–10463", u: "https://doi.org/10.1021/acs.jpclett.6c02411" },
+    { y: 2026, a: "M. Liu, S. Mei, M. A. Khan, W. Pei, F. Lu, L. Min, M. Zhou", j: "Small", d: "e75711", u: "https://doi.org/10.1002/smll.75711" },
+    { y: 2026, a: "T. Du, W. Pei*, P. Han, X. Yang, J. Zhao*, S. Zhou*", j: "Mater. Futures", d: "5, 045601", u: "http://iopscience.iop.org/article/10.1088/2752-5724/ae828c" },
     { y: 2026, a: "Y. Zhou, Y. Song, X. Yu*, S. Zhou*, W. Pei*, J. Zhao", j: "J. Am. Chem. Soc.", d: "148, 27688–27696", u: "https://doi.org/10.1021/jacs.6c07842", sel: true, t: "Structure-Induced Spin Switching in Triple-Decker Metal–Ring–Metal Nanoclusters" },
 
     /* 2025 */
@@ -309,7 +313,7 @@ window.LAB = {
         {
           zh: "周羽", en: "Yu Zhou", role: { zh: "硕士研究生", en: "M.Sc. student" },
           notes: [
-            { zh: "2025 年研究生国家奖学金", en: "2025 National Scholarship for Graduate Students" },
+            { zh: "2025、2026 年研究生国家奖学金（连续两年）", en: "2025 and 2026 National Scholarship for Graduate Students" },
             { zh: "JACS (2026) 第一作者：三层金属–环–金属团簇的结构诱导自旋翻转", en: "First author, JACS (2026): structure-induced spin switching in triple-decker clusters" }
           ]
         },
@@ -404,6 +408,17 @@ window.LAB = {
 
   /* ---------------- 新闻动态 ---------------- */
   news: [
+    {
+      date: "2026-10-20", type: "award", pl: "", src: { zh: "课题组", en: "Group" },
+      t: { zh: "周羽获 2026 年研究生国家奖学金，连续两年获此荣誉", en: "Yu Zhou receives the 2026 National Scholarship, his second consecutive award" },
+      d: { zh: "硕士研究生周羽继 2025 年后再次获评研究生国家奖学金。其在学期间以第一作者在 JACS 发表三层金属–环–金属团簇自旋翻转工作。", en: "M.Sc. student Yu Zhou has been awarded the National Scholarship for Graduate Students for a second consecutive year, following his first-author JACS paper on spin switching in triple-decker clusters." }
+    },
+    {
+      date: "2026-09-04", type: "media", pl: "wechat", src: { zh: "材料科学与工程（微信公众号）", en: "Materials Science & Engineering (WeChat)" },
+      t: { zh: "纯计算一区顶刊 LPR：首次揭示黑磷量子点中的自陷激子", en: "LPR: self-trapped excitons in black phosphorus quantum dots" },
+      d: { zh: "解读裴玮参与通讯的 LPR 工作，系统梳理尺寸、溶剂与边缘掺杂三个变量如何调控自陷激子的形成与发射。", en: "A detailed walkthrough of the LPR work co-corresponding to Wei Pei, covering how size, solvent and edge doping govern self-trapped exciton formation and emission." },
+      u: "https://c.m.163.com/news/a/L60593OQ05118KMO.html"
+    },
     {
       date: "2026-09-01", type: "group", pl: "", src: { zh: "课题组", en: "Group" },
       t: { zh: "2027 级硕士、博士研究生招生中", en: "Recruiting M.Sc. and Ph.D. students for 2027" },
