@@ -491,6 +491,8 @@ a.news-item__t:hover { color: var(--navy); text-decoration: underline; text-unde
 .kind--group { border-color: #c6d2dd; color: var(--navy); background: var(--navy-soft); }
 .kind--talk { border-color: #cdd8cd; color: #4a6b4d; background: #eef3ee; }
 .kind--award { border-color: #e0d0c4; color: #8a5a3b; background: #f7efe9; }
+.kind--pin { border-color: #c9b089; color: #7a5a2e; background: var(--gold-soft); font-weight: 600; }
+.news-item.is-pinned { background: linear-gradient(90deg, var(--gold-soft), transparent 46%); }
 
 .aggregator-note {
   margin-top: 44px; padding: 22px 24px; border: 1px solid var(--line); background: #fff;

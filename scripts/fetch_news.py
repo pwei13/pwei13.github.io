@@ -335,6 +335,13 @@ def main():
         seen.add(k)
         merged.append(entry)
 
+    # 回填已有条目的 pin，保证置顶标记不被新一轮抓取冲掉
+    pin_map = {key_of(e): e.get("pin") for e in existing if e.get("pin")}
+    for entry in merged:
+        pin = pin_map.get(key_of(entry))
+        if pin is not None:
+            entry["pin"] = pin
+
     merged.sort(key=lambda e: (e.get("date", ""), 0 if e.get("undated") else 1), reverse=True)
     merged = merged[:args.limit]
 

@@ -322,7 +322,7 @@ window.LAB = {
           notes: [{ zh: "物理学 · 凝聚态物理 · 全日制学术型硕士", en: "Condensed matter physics · full-time M.Sc. by research" }]
         },
         {
-          zh: "毛永强", en: "Yongqiang Mao", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          zh: "毛永强", en: "Yongqiang Mao", role: { zh: "2025 级硕士", en: "M.Sc. 2025" },
           notes: [{ zh: "电子信息 · 全日制专业学位硕士", en: "Electronic Information · professional M.Sc." }]
         },
         {
@@ -430,7 +430,7 @@ window.LAB = {
   /* ---------------- 新闻动态 ---------------- */
   news: [
     {
-      date: "2026-10-20", type: "award", pl: "", src: { zh: "课题组", en: "Group" },
+      date: "2026-10-20", pin: 1, type: "award", pl: "", src: { zh: "课题组", en: "Group" },
       t: { zh: "周羽获 2026 年研究生国家奖学金，连续两年获此荣誉", en: "Yu Zhou receives the 2026 National Scholarship, his second consecutive award" },
       d: { zh: "硕士研究生周羽继 2025 年后再次获评研究生国家奖学金。其在学期间以第一作者在 JACS 发表三层金属–环–金属团簇自旋翻转工作。", en: "M.Sc. student Yu Zhou has been awarded the National Scholarship for Graduate Students for a second consecutive year, following his first-author JACS paper on spin switching in triple-decker clusters." }
     },

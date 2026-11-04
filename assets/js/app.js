@@ -61,6 +61,7 @@
       'news.aggDesc': '本栏目由聚合脚本按固定关键词（课题组负责人姓名、单位、团簇与超原子相关主题）定期检索全网新闻与微信公众号文章，去重后按时间排序写入 data/news.json；页面加载时优先读取该文件，读取失败则回退到内置数据。外部报道的标题与观点归原发布方所有。',
       'news.aggRun': '运行 fetch_news.py 可手动刷新',
       'news.empty': '当前筛选下暂无条目。',
+      'news.pin': '置顶',
 
       'join.k': 'Join us', 'join.t': '招生招聘',
       'join.l': '我们更看重好奇心与耐心，而不是你已经会用什么软件。',
@@ -130,6 +131,7 @@
       'news.aggDesc': 'A scheduled script searches the web and WeChat academic accounts using fixed keywords (PI name, affiliation, cluster and superatom topics), de-duplicates the results and writes them, in reverse chronological order, to data/news.json. The page reads that file first and falls back to embedded data if it is unavailable. Titles and views in external coverage remain those of the original publishers.',
       'news.aggRun': 'Run fetch_news.py to refresh manually',
       'news.empty': 'No entries under the current filter.',
+      'news.pin': 'Pinned',
 
       'join.k': 'Join us', 'join.t': 'Open positions',
       'join.l': 'Curiosity and patience matter more to us than the software you already know.',
@@ -218,10 +220,10 @@
         '<span class="mini-pub__y">' + x.y + '</span></a>';
     }).join('');
 
-    var latest = state.news.slice(0, 3).map(function (n) {
-      return '<article class="news-item">' + newsDate(n) +
+    var latest = state.news.slice().sort(newsSort).slice(0, 3).map(function (n) {
+      return '<article class="news-item' + (n.pin ? ' is-pinned' : '') + '">' + newsDate(n) +
         '<div>' + newsTitle(n) + newsDesc(n) + newsSrc(n) + '</div>' +
-        '<div class="news-item__kind">' + kindBadge(n.type) + '</div></article>';
+        '<div class="news-item__kind">' + pinMark(n) + kindBadge(n.type) + '</div></article>';
     }).join('');
 
     return '<div class="hero"><div class="wrap"><div class="hero__grid">' +
@@ -471,6 +473,19 @@
   function newsDate(n) {
     return '<div class="news-item__date"><b>' + n.date.slice(5).replace('-', '.') + '</b><span>' + n.date.slice(0, 4) + '</span></div>';
   }
+  // 置顶排序：带 pin 的条目永远在前，pin 升序（1 最高），pin 相同/不置顶条目按 date 降序，
+  // date 相同返回 0，Array.prototype.sort 为稳定排序，保持原顺序
+  function newsSort(a, b) {
+    var pa = a.pin === true ? 1 : (typeof a.pin === 'number' ? a.pin : 0);
+    var pb = b.pin === true ? 1 : (typeof b.pin === 'number' ? b.pin : 0);
+    if (!!pa !== !!pb) return pa ? -1 : 1;
+    if (pa && pb && pa !== pb) return pa - pb;
+    if (a.date !== b.date) return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0);
+    return 0;
+  }
+  function pinMark(n) {
+    return n.pin ? '<span class="kind kind--pin">' + t('news.pin') + '</span>' : '';
+  }
 
   function viewNews() {
     var filters = [['all', t('news.all')], ['group', t('news.group')], ['media', t('news.media')], ['talk', t('news.talk')], ['award', t('news.award')]]
@@ -478,11 +493,11 @@
         return '<button type="button" class="chip' + (state.newsFilter === x[0] ? ' is-on' : '') + '" data-newsfilter="' + x[0] + '">' + x[1] + '</button>';
       }).join('');
 
-    var items = state.news.filter(function (n) { return state.newsFilter === 'all' || n.type === state.newsFilter; });
+    var items = state.news.filter(function (n) { return state.newsFilter === 'all' || n.type === state.newsFilter; }).sort(newsSort);
     var list = items.length ? items.map(function (n) {
-      return '<article class="news-item">' + newsDate(n) +
+      return '<article class="news-item' + (n.pin ? ' is-pinned' : '') + '">' + newsDate(n) +
         '<div>' + newsTitle(n) + newsDesc(n) + newsSrc(n) + '</div>' +
-        '<div class="news-item__kind">' + kindBadge(n.type) + '</div></article>';
+        '<div class="news-item__kind">' + pinMark(n) + kindBadge(n.type) + '</div></article>';
     }).join('') : '<p class="small muted" style="padding:40px 0">' + t('news.empty') + '</p>';
 
     return '<div class="wrap">' + secHead('news.k', t('news.t'), t('news.l')) +
@@ -842,7 +857,7 @@
       seen[k] = 1;
       all.push(n);
     });
-    all.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    all.sort(newsSort);
     return all;
   }
 

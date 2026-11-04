@@ -90,6 +90,8 @@ python scripts/fetch_news.py --dry-run       # 只打印，不写文件
 python scripts/fetch_news.py --limit 40      # 最多保留 40 条
 ```
 
+**新闻置顶**：在新闻条目（`data/news.json` 的 `items`，或 `assets/js/data.js` 的 `news` 数组）里加 `"pin": 1`——`1` 为最高优先级，也可用 `2`、`3` 参与置顶之间排序（数字越小越靠前）。页面会把置顶条目排到最前并显示「置顶」徽章；聚合脚本合并旧数据时会保留条目的 `pin`。
+
 **检索配置**（脚本顶部，按需修改）：
 
 - `WEB_QUERIES` / `WECHAT_QUERIES`：检索词
