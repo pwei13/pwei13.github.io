@@ -33,7 +33,7 @@
       'team.k': 'People', 'team.t': '课题组成员',
       'team.l': '一个不大的组：讨论充分，动手要快，写东西要清楚。',
       'team.pi': '课题组负责人',
-      'team.note': '成员名单、荣誉与去向依据学院公开获奖记录整理（2023–2026）。在读状态与最新成员信息，请以课题组公告为准。',
+      'team.note': '成员名单、荣誉与去向依据学院公开获奖记录及学籍信息整理（2023–2026）。在读状态与最新成员信息，请以课题组公告为准。',
       'team.people': '人',
 
       'research.k': 'Research', 'research.t': '研究方向',
@@ -102,7 +102,7 @@
       'team.k': 'People', 'team.t': 'Group members',
       'team.l': 'A small group: discuss thoroughly, build quickly, write clearly.',
       'team.pi': 'Principal investigator',
-      'team.note': 'Names, awards and destinations are compiled from publicly available school records (2023–2026). For current membership, please refer to the group\u2019s latest announcements.',
+      'team.note': 'Names, awards and destinations are compiled from public school records and enrolment data (2023\u20132026). For current membership, please refer to the group\u2019s latest announcements.',
       'team.people': 'people',
 
       'research.k': 'Research', 'research.t': 'Research directions',

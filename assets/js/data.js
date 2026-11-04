@@ -307,18 +307,45 @@ window.LAB = {
   members: [
     {
       key: "grad",
-      title: { zh: "研究生", en: "Graduate students" },
-      note: { zh: "含 2024–2025 届毕业生", en: "Including 2024–2025 cohort" },
+      title: { zh: "在读研究生", en: "Current graduate students" },
+      note: { zh: "2025–2026 级 · 依据学院学籍信息", en: "2025–2026 cohorts · per university enrolment records" },
       people: [
         {
-          zh: "周羽", en: "Yu Zhou", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          zh: "周羽", en: "Yu Zhou", role: { zh: "硕士研究生 · 物理学", en: "M.Sc. student · Physics" },
           notes: [
             { zh: "2025、2026 年研究生国家奖学金（连续两年）", en: "2025 and 2026 National Scholarship for Graduate Students" },
             { zh: "JACS (2026) 第一作者：三层金属–环–金属团簇的结构诱导自旋翻转", en: "First author, JACS (2026): structure-induced spin switching in triple-decker clusters" }
           ]
         },
         {
-          zh: "杨晶", en: "Jing Yang", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          zh: "庞芳", en: "Fang Pang", role: { zh: "2025 级硕士", en: "M.Sc. 2025" },
+          notes: [{ zh: "物理学 · 凝聚态物理 · 全日制学术型硕士", en: "Condensed matter physics · full-time M.Sc. by research" }]
+        },
+        {
+          zh: "毛永强", en: "Yongqiang Mao", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          notes: [{ zh: "电子信息 · 全日制专业学位硕士", en: "Electronic Information · professional M.Sc." }]
+        },
+        {
+          zh: "鲍一凡", en: "Yifan Bao", role: { zh: "2026 级硕士", en: "M.Sc. 2026" },
+          notes: [{ zh: "电子信息 · 全日制专业学位硕士", en: "Electronic Information · professional M.Sc." }]
+        },
+        {
+          zh: "杜昕蒙", en: "Xinmeng Du", role: { zh: "2026 级硕士", en: "M.Sc. 2026" },
+          notes: [{ zh: "物理学 · 凝聚态物理 · 全日制学术型硕士", en: "Condensed matter physics · full-time M.Sc. by research" }]
+        },
+        {
+          zh: "余圣泽", en: "Shengze Yu", role: { zh: "2026 级硕士", en: "M.Sc. 2026" },
+          notes: [{ zh: "物理学 · 凝聚态物理 · 全日制学术型硕士", en: "Condensed matter physics · full-time M.Sc. by research" }]
+        }
+      ]
+    },
+    {
+      key: "alumni",
+      title: { zh: "已毕业研究生", en: "Alumni" },
+      note: { zh: "2024–2026 届", en: "Classes of 2024–2026" },
+      people: [
+        {
+          zh: "杨晶", en: "Jing Yang", role: { zh: "2026 届硕士", en: "M.Sc. 2026" },
           notes: [
             { zh: "2024 年一等学业奖学金；2025 年研究生国家奖学金", en: "2024 First-class Academic Scholarship; 2025 National Scholarship" },
             { zh: "AFM (2025) 第一作者：异质原子掺杂诱导 Au 团簇高–低自旋异构", en: "First author, AFM (2025): heteroatom doping induced high–low spin isomers" }
@@ -326,20 +353,13 @@ window.LAB = {
           to: { zh: "华南师范大学 攻读博士", en: "Ph.D. at South China Normal University" }
         },
         {
-          zh: "周吉祥", en: "Jixiang Zhou", role: { zh: "硕士研究生", en: "M.Sc. student" },
+          zh: "周吉祥", en: "Jixiang Zhou", role: { zh: "2026 届硕士", en: "M.Sc. 2026" },
           notes: [
             { zh: "2024 年一等学业奖学金；2025 年研究生国家奖学金", en: "2024 First-class Academic Scholarship; 2025 National Scholarship" },
             { zh: "Appl. Phys. Lett. (2025) 第一作者（两篇）", en: "First author of two papers in Appl. Phys. Lett. (2025)" }
           ],
           to: { zh: "事业单位就业", en: "Public institution" }
-        }
-      ]
-    },
-    {
-      key: "alumni",
-      title: { zh: "已毕业研究生", en: "Alumni" },
-      note: { zh: "2024 届", en: "Class of 2024" },
-      people: [
+        },
         {
           zh: "侯蕾", en: "Lei Hou", role: { zh: "2024 届硕士", en: "M.Sc. 2024" },
           notes: [
@@ -400,7 +420,8 @@ window.LAB = {
           notes: [
             { zh: "第 21 届江苏省高校物理实验科技作品竞赛三等奖", en: "Third Prize, 21st Jiangsu Physics Experimental Competition" },
             { zh: "JACS (2026) / J. Phys. D 共同作者", en: "Co-author, JACS (2026) and J. Phys. D" }
-          ]
+          ],
+          to: { zh: "推免复旦大学 攻读研究生", en: "Recommended for graduate study at Fudan University" }
         }
       ]
     }
